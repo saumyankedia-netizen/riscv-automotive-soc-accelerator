@@ -51,3 +51,4 @@ To eliminate host OS library incompatibilities, the entire physical flow is exec
 - **Container Architecture:** `x86_64` (Linux)
 - **Base Management System:** Nix Flakes (Guarantees byte-for-byte reproducible tool builds)
 - **Automation Runner:** GitHub Actions (`ubuntu-22.04` runner image)
+

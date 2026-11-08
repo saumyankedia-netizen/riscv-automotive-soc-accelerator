@@ -213,3 +213,4 @@ set_load 0.035 [all_outputs]
 | Total Core Power | $< 25.0\,\text{mW}$ | $9.84\,\text{mW}$ | **PASSED** |
 | Power Density | $< 100.0\,\text{mW}/\text{mm}^2$ | $58.5\,\text{mW}/\text{mm}^2$ | **PASSED** |
 | DRC / LVS Violations | 0 Violations | 0 Violations | **PASSED** |
+

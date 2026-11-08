@@ -76,3 +76,4 @@ Our design maps to $14,832$ standard cells across several primary function class
 - **DRC Engine:** Magic VLSI Layout System (`RUN_MAGIC_DRC`) & KLayout DRC.
 - **LVS Engine:** Netgen (Layout vs. Schematic comparison against SPICE netlist).
 - **Antenna Rules:** Diode insertion rules on long metal runs to protect thin gate oxides from plasma charge accumulation.
+
