@@ -1,4 +1,4 @@
-name: RTL to GDSII Flow (OpenLane / Sky130)
+name: RTL to GDSII Flow (OpenLane 2 / Sky130)
 
 on:
   push:
@@ -8,24 +8,35 @@ on:
 jobs:
   openlane:
     runs-on: ubuntu-latest
-    container:
-      image: efabless/openlane:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run OpenLane Flow
-        run: |
-          flow.tcl -design openlane -tag run_soc_core || openlane --design-dir openlane --tag run_soc_core
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      - name: Upload GDSII and Layout Artifacts
+      - name: Install OpenLane 2
+        run: |
+          pip install --upgrade pip
+          pip install openlane
+
+      - name: Verify OpenLane installation
+        run: openlane --version
+
+      - name: Run OpenLane 2 Flow
+        run: |
+          openlane openlane/soc_core/config.json
+
+      - name: Upload GDSII and Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: soc_core_gdsii
           path: |
-            openlane/runs/*/results/final/gds/*.gds
-            openlane/runs/*/results/final/def/*.def
-            openlane/runs/*/reports/metrics.csv
-            openlane/runs/*/reports/synthesis/*.stat.rpt
-            openlane/runs/*/reports/
+            openlane/soc_core/runs/*/final/gds/*.gds
+            openlane/soc_core/runs/*/final/def/*.def
+            openlane/soc_core/runs/*/reports/metrics.csv
+            openlane/soc_core/runs/*/reports/synthesis/*.stat.rpt
+            openlane/soc_core/runs/*/reports/
