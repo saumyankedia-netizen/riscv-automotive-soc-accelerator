@@ -8,24 +8,24 @@ on:
 jobs:
   openlane:
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/efabless/openlane2:2.3.10
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      # ── 1. Checkout ────────────────────────────────────────────────────────
+      # ── 1. Checkout on the HOST runner (not inside Docker) ─────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ── 2. Verify tools ────────────────────────────────────────────────────
-      - name: Verify OpenLane 2
-        run: openlane --version
+      # ── 2. Pull OpenLane 2 image ───────────────────────────────────────────
+      - name: Pull OpenLane 2 Docker image
+        run: docker pull ghcr.io/efabless/openlane2:2.3.10
 
-      # ── 3. Run RTL-to-GDSII flow ───────────────────────────────────────────
+      # ── 3. Run RTL-to-GDSII flow inside container, workspace mounted in ────
       - name: Run OpenLane 2 Flow
-        run: openlane openlane/soc_core/config.json
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/work \
+            -w /work \
+            ghcr.io/efabless/openlane2:2.3.10 \
+            openlane openlane/soc_core/config.json
 
       # ── 4. Upload GDSII and reports ────────────────────────────────────────
       - name: Upload GDSII and Reports
