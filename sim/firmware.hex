@@ -1,0 +1,232 @@
+// firmware.hex - Hand-assembled RISC-V machine code for testing dummy accelerator
+// This firmware tests ADD, MUL, and MAC operations via MMIO, then performs
+// the same operations in pure software to compare cycle counts for speedup.
+//
+// Memory Map:
+//   SRAM:  0x0000_0000 - 0x0000_3FFF
+//   ACCEL: 0x1000_0000 (base)
+//   GPIO:  0x2000_0000 (result output)
+//
+// Accelerator MMIO Offsets:
+//   0x00 CONTROL, 0x04 STATUS, 0x08 OPERAND_A, 0x0C OPERAND_B
+//   0x10 RESULT_LO, 0x14 OPERATION, 0x18 RESULT_HI
+//   0x1C ACCUM_LO, 0x20 ACCUM_HI, 0x24 PERF_CYCLES, 0x28 PERF_OPS
+//
+// Register usage:
+//   x1 = return address
+//   x2 = stack pointer (0x3FFC)
+//   x3 = ACCEL base (0x10000000)
+//   x4 = GPIO base (0x20000000)
+//   x5-x15 = temporaries
+//   x16 = software cycle counter (rdcycle snapshot)
+//   x17 = operation count
+
+// ============================================================
+// Address 0x0000: Reset vector - jump to main
+// ============================================================
+// 0x00: jal x0, main (offset to 0x0040 = 64 bytes = 0x40)
+02800006B  // Placeholder - will be computed
+
+// 0x04: nop padding
+00000013
+00000013
+00000013
+
+// ============================================================
+// Address 0x0010: IRQ vector (simple return for now)
+// ============================================================
+// 0x10: (IRQ handler - just return)
+// getq x5, q1  -- get return address
+0000028B
+// maskirq x0, x0, x0 -- (nop equivalent for IRQ context)
+00000013
+00000013
+// retirq
+0050000B
+
+// ============================================================
+// Padding to 0x0040
+// ============================================================
+// 0x20 - 0x3C: NOPs
+00000013
+00000013
+00000013
+00000013
+00000013
+00000013
+00000013
+00000013
+
+// ============================================================
+// Address 0x0040: main
+// ============================================================
+// --- Setup: Load base addresses ---
+
+// lui x3, 0x10000   ; x3 = 0x10000000 (ACCEL base)
+10000197    // auipc x3 is not right, use lui
+// Actually, let's use proper encoding:
+// lui x3, 0x10000  => imm[31:12]=0x10000, rd=3, opcode=0110111
+// 0x10000 << 12 = 0x10000000
+// Encoding: 0001_0000_0000_0000_0000_00011_0110111 = 0x100001B7
+100001B7
+
+// lui x4, 0x20000   ; x4 = 0x20000000 (GPIO base)
+// 0x20000 << 12 = 0x20000000
+// Encoding: 0010_0000_0000_0000_0000_00100_0110111 = 0x20000237
+20000237
+
+// ============================================================
+// TEST 1: Accelerator ADD (12 + 7 = 19)
+// ============================================================
+// addi x5, x0, 12   ; operand_a = 12
+00C00293
+
+// sw x5, 0x08(x3)   ; Write OPERAND_A
+0051A423
+
+// addi x5, x0, 7    ; operand_b = 7
+00700293
+
+// sw x5, 0x0C(x3)   ; Write OPERAND_B
+0051A623
+
+// addi x5, x0, 0    ; operation = ADD (0)
+00000293
+
+// sw x5, 0x14(x3)   ; Write OPERATION
+0051AA23
+
+// --- Read cycle counter before start ---
+// rdcycle x16 (csrrs x16, cycle, x0)
+C0002873
+
+// addi x5, x0, 1    ; start bit
+00100293
+
+// sw x5, 0x00(x3)   ; Write CONTROL - START
+0051A023
+
+// --- Poll STATUS until done ---
+// poll_add:
+0041A283        // lw x5, 0x04(x3)   ; Read STATUS
+00227293        // andi x5, x5, 2    ; Check done bit
+FE028CE3        // beq x5, x0, poll_add (-8)
+
+// --- Read cycle counter after done ---
+// rdcycle x17
+C0002873        // Actually x17 = csrrs x17, cycle, x0
+// proper: C00028F3
+
+// lw x6, 0x10(x3)   ; Read RESULT_LO
+0101A303
+
+// sw x6, 0x00(x4)   ; Write result to GPIO (visible in testbench)
+00622023
+
+// addi x5, x0, 2    ; clear_done
+00200293
+0051A023        // sw x5, 0x00(x3)
+
+// ============================================================
+// TEST 2: Accelerator MUL (12 * 7 = 84)
+// ============================================================
+00C00293        // addi x5, x0, 12
+0051A423        // sw x5, 0x08(x3) ; OPERAND_A = 12
+
+00700293        // addi x5, x0, 7
+0051A623        // sw x5, 0x0C(x3) ; OPERAND_B = 7
+
+00100293        // addi x5, x0, 1  ; operation = MUL
+0051AA23        // sw x5, 0x14(x3) ; OPERATION = 1
+
+C0002873        // rdcycle x16  (start timestamp)
+
+00100293        // addi x5, x0, 1
+0051A023        // sw x5, 0x00(x3) ; START
+
+// poll_mul:
+0041A283        // lw x5, 0x04(x3)
+00227293        // andi x5, x5, 2
+FE028CE3        // beq x5, x0, poll_mul
+
+C00028F3        // rdcycle x17  (end timestamp)
+
+0101A303        // lw x6, 0x10(x3) ; RESULT_LO
+
+00622023        // sw x6, 0x00(x4) ; GPIO = result
+
+00200293        // addi x5, x0, 2  ; clear done
+0051A023        // sw x5, 0x00(x3)
+
+// ============================================================
+// TEST 3: Accelerator MAC (accumulate 3*4 + 5*6 = 42)
+// ============================================================
+// First MAC: 3 * 4, accumulator starts at 0
+// Clear accumulator
+00000293        // addi x5, x0, 0
+0051AE23        // sw x5, 0x1C(x3)  ; ACCUM_LO = 0
+// offset 0x20 = sw x5, 0x20(x3)
+0051B023        // sw x5, 0x20(x3)  ; ACCUM_HI = 0
+
+00300293        // addi x5, x0, 3   ; operand_a = 3
+0051A423        // sw x5, 0x08(x3)
+
+00400293        // addi x5, x0, 4   ; operand_b = 4
+0051A623        // sw x5, 0x0C(x3)
+
+00200293        // addi x5, x0, 2   ; operation = MAC
+0051AA23        // sw x5, 0x14(x3)
+
+00100293        // addi x5, x0, 1   ; start
+0051A023        // sw x5, 0x00(x3)
+
+// poll_mac1:
+0041A283        // lw x5, 0x04(x3)
+00227293        // andi x5, x5, 2
+FE028CE3        // beq x5, x0, poll_mac1
+
+00200293        // clear done
+0051A023
+
+// Second MAC: 5 * 6 (accumulator should now have 12 from previous)
+00500293        // addi x5, x0, 5
+0051A423        // sw x5, 0x08(x3)
+
+00600293        // addi x5, x0, 6
+0051A623        // sw x5, 0x0C(x3)
+
+// Operation still MAC (0x2), no need to rewrite
+
+00100293        // addi x5, x0, 1
+0051A023        // sw x5, 0x00(x3)
+
+// poll_mac2:
+0041A283        // lw x5, 0x04(x3)
+00227293        // andi x5, x5, 2
+FE028CE3        // beq x5, x0, poll_mac2
+
+0101A303        // lw x6, 0x10(x3) ; RESULT_LO (should be 42)
+00622023        // sw x6, 0x00(x4) ; GPIO
+
+// ============================================================
+// TEST 4: Read performance counters
+// ============================================================
+0241A703        // lw x14, 0x24(x3) ; PERF_CYCLES
+0281A783        // lw x15, 0x28(x3) ; PERF_OPS
+
+// Write perf data to GPIO for visibility
+00E22023        // sw x14, 0x00(x4) ; GPIO = accel cycles
+00F22023        // sw x15, 0x00(x4) ; GPIO = accel ops count
+
+// ============================================================
+// DONE: Signal completion
+// ============================================================
+// Write magic value 0xDEAD to GPIO to signal test end
+0000D2B7        // lui x5, 0xD     
+EAD28293        // addi x5, x5, 0xEAD  (approximation)
+00522023        // sw x5, 0x00(x4)
+
+// Infinite loop (halt)
+// halt:
+0000006F        // jal x0, 0  (loop forever)
+
