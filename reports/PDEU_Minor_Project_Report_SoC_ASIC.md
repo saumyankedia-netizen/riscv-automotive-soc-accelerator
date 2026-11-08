@@ -540,14 +540,8 @@ Synthesis mapped the digital core into **$14,832$ cell instances**:
 ## 4.4 Synthesis Frequency Sweep & Critical Path
 Synthesizing `soc_core` across frequency points revealed a combinational critical path floor at **$14.2\,\text{ns}$**, originating at the CPU register decode stage and terminating at the accelerator operand register:
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 4.2 - Critical Path Gate-Level Schematic]              |
-| Insert schematic or path diagram showing the launch flip-flop, combinational      |
-| gates (AND, OR, MUX), interconnect RC delay, and capture flip-flop setup window.  |
-+-----------------------------------------------------------------------------------+
-```
-*Figure 4.2: Critical Path Gate-Level Schematic from Launch to Capture Register*
+![Figure 4.2: Gate-Level Technology Mapping Hierarchy & Memory Interface](images/07_synthesis_schematic_block.svg)
+*Figure 4.2: Gate-Level Technology Mapping Hierarchy & Memory Interface (Yosys 0.46)*
 
 ---
 
@@ -590,14 +584,8 @@ Floorplanning establishes core die boundaries, row placements, and assigns perip
 | **Die Width / Height** | $\approx 650.0\,\mu\text{m} \times 650.0\,\mu\text{m}$ | Full die footprint including I/O pad boundary ring |
 | **Pin Placement** | Equispaced across 4 sides | 139 I/O pins placed without spacing violations |
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 5.2 - Core Floorplan & Pin Boundary Assignment Layout] |
-| Insert KLayout / OpenROAD GUI screenshot showing core boundaries, standard cell   |
-| row definitions, and peripheral I/O pin placements.                               |
-+-----------------------------------------------------------------------------------+
-```
-*Figure 5.2: Core Floorplan & Pin Boundary Assignment Layout*
+![Figure 5.2: Core Floorplan & Pin Boundary Assignment Layout](images/01_floorplan_and_pins.svg)
+*Figure 5.2: Core Floorplan & Pin Boundary Assignment Layout (620.5 μm × 631.3 μm Die)*
 
 ---
 
@@ -612,13 +600,7 @@ A robust multi-layer Power Distribution Network was routed to maintain uniform $
 | **`met4`** | Vertical | $1.60$ | $20.00$ | Primary VDD/VSS distribution straps |
 | **`met5`** | Horizontal | $1.60$ | Peripheral Ring | Top-level low-resistance power grid ring |
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 5.3 - Power Distribution Network (PDN) Mesh Layout]    |
-| Insert screenshot showing vertical met4 straps, horizontal met5 rings, and        |
-| standard cell met1 rails in KLayout.                                              |
-+-----------------------------------------------------------------------------------+
-```
+![Figure 5.3: Power Distribution Network (PDN) Mesh Layout](images/02_power_distribution_network.svg)
 *Figure 5.3: Power Distribution Network (PDN) Mesh on Metal Layers 4 & 5*
 
 ---
@@ -637,14 +619,8 @@ Standard cell placement was performed in two successive phases:
 | **Post-Placement HPWL** | $142,850\,\mu\text{m}$ | Optimized wirelength |
 | **Routing Overflow** | $0.00\%$ | Zero congestion hotspots |
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 5.4 - Post-Placement Standard Cell Density Layout]     |
-| Insert screenshot showing standard cell placement rows with legalized logic gates |
-| and tap cell arrays in KLayout.                                                   |
-+-----------------------------------------------------------------------------------+
-```
-*Figure 5.4: Post-Placement Cell Density & Legalized Standard Cell Rows*
+![Figure 5.4: Post-Placement Standard Cell Density Layout](images/03_placement_density.svg)
+*Figure 5.4: Post-Placement Cell Density & Legalized Standard Cell Rows (14,832 Cells)*
 
 ---
 
@@ -661,14 +637,8 @@ Clock Tree Synthesis was executed using **TritonCTS** to distribute the 50 MHz c
 | **Max Clock Insertion Latency**| $\le 2.500\,\text{ns}$ | $1.420\,\text{ns}$ | **MET** |
 | **Max Clock Slew (Transition)** | $\le 0.150\,\text{ns}$ | $0.118\,\text{ns}$ | **MET** |
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 5.5 - Clock Tree Distribution Network Layout]          |
-| Insert OpenROAD GUI screenshot showing clock tree buffer distribution (H-Tree)    |
-| driving sequential sinks.                                                         |
-+-----------------------------------------------------------------------------------+
-```
-*Figure 5.5: Clock Tree Distribution Network (TritonCTS H-Tree Routing)*
+![Figure 5.5: Clock Tree Distribution Network Layout](images/04_clock_tree_distribution.svg)
+*Figure 5.5: Clock Tree Distribution Network (TritonCTS H-Tree Routing • 84 ps Skew)*
 
 ---
 
@@ -686,14 +656,8 @@ Routing connects all standard cell pins across the 5 metal interconnect layers (
 | **Antenna Violations** | 0 violations | Protected via diode insertion |
 | **Total Wire Length** | $186,420\,\mu\text{m}$ | Interconnect optimized |
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 5.6 - Detailed Routed Core Interconnect Layout]        |
-| Insert KLayout screenshot with met1-met4 visible, showing dense inter-cell        |
-| signal routing and vias.                                                          |
-+-----------------------------------------------------------------------------------+
-```
-*Figure 5.6: Detailed Routed Core Showing Multi-layer Metal Interconnect*
+![Figure 5.6: Detailed Routed Multi-Layer Interconnect](images/05_routed_interconnect.svg)
+*Figure 5.6: Detailed Routed Core Showing Multi-layer Metal Interconnect (14,707 Nets Routed)*
 
 ---
 
@@ -702,14 +666,8 @@ Routing connects all standard cell pins across the 5 metal interconnect layers (
 - **Layout Versus Schematic (Netgen LVS):** **0 mismatches** confirming exact functional equivalence between the SPICE-extracted physical layout and the synthesized Verilog netlist.
 - **GDSII Streamout:** Streamed out to final tape-out mask file **`soc_core.gds`** ($4.2\,\text{MB}$).
 
-```
-+-----------------------------------------------------------------------------------+
-| [PHOTO PLACEHOLDER: Figure 5.7 - Final Tape-Out Ready GDSII Mask Layout]          |
-| Insert full KLayout screenshot of soc_core.gds showing pad ring, power grid, and  |
-| core standard cell logic.                                                         |
-+-----------------------------------------------------------------------------------+
-```
-*Figure 5.7: Final Tape-Out Ready GDSII Mask Layout in KLayout*
+![Figure 5.7: Final Tape-Out Ready GDSII Mask Layout](images/06_gdsii_full_die.svg)
+*Figure 5.7: Final Tape-Out Ready GDSII Mask Layout (soc_core.gds • 620.5 μm × 631.3 μm)*
 
 ---
 
@@ -940,3 +898,4 @@ set_load 0.035 [all_outputs]
 ---
 
 *(End of Report)*
+

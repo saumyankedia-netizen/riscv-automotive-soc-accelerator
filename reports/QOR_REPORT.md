@@ -102,3 +102,4 @@ bar-beta
   - `met4` (Vertical): Power distribution straps & clock distribution lines.
   - `met5` (Horizontal): Power distribution grid rings and I/O landing pads.
 - **Detailed Routing Congestion:** **$0.00\%$ overflow** across all horizontal and vertical routing channels.
+

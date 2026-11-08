@@ -146,3 +146,4 @@ set_load 0.035 [all_outputs]
 | Max Input Transition | $\le 1.500\,\text{ns}$ | **$0.380\,\text{ns}$** | **MET** |
 | Max Capacitance Rule | Clean per cell limits | **0 Violations** | **MET** |
 | Max Fanout Rule | $\le 16$ loads | **0 Violations (Buffered)** | **MET** |
+

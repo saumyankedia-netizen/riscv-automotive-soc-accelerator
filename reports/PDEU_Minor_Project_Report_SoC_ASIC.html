@@ -349,9 +349,8 @@ Furthermore, traditional commercial ASIC development has historically been gated
 The SoC is structured around a centralized synchronous bus topology where the PicoRV32 processor acts as the primary bus master, and the SRAM memory, hardware accelerator, and GPIO output latch function as memory-mapped bus slaves.
 </p>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 2.1: SoC Interconnect Architecture Diagram]</div>
-  <div class="placeholder-desc">Diagram showing PicoRV32 core connected via mem_valid, mem_ready, addr, wdata, rdata to mmio_decoder routing to SRAM (0x00000000), Accelerator (0x10000000), and GPIO (0x20000000).</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/07_synthesis_schematic_block.svg" alt="Figure 2.1: Block Diagram of Integrated PicoRV32 SoC" style="width: 100%; max-width: 900px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
 <div class="caption">Figure 2.1: Block Diagram of Integrated PicoRV32 SoC with Hardware Accelerator</div>
 
@@ -762,11 +761,10 @@ Synthesis maps Verilog RTL to standard cell primitives from the SkyWater 130nm l
 </table>
 <div class="caption">Table 4.2: Synthesized Standard Cell Distribution in soc_core</div>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 4.2: Critical Path Gate-Level Schematic]</div>
-  <div class="placeholder-desc">Insert schematic or path delay diagram showing launch flip-flop, combinational gates (AND, OR, MUX), interconnect RC delay, and capture flip-flop setup window.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/07_synthesis_schematic_block.svg" alt="Figure 4.2: Synthesized Logic Hierarchy & Gate Mapping" style="width: 100%; max-width: 900px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
-<div class="caption">Figure 4.2: Critical Path Gate-Level Schematic from Launch to Capture Register</div>
+<div class="caption">Figure 4.2: Gate-Level Technology Mapping Hierarchy &amp; Memory Interface (Yosys 0.46)</div>
 
 <!-- CHAPTER 5 -->
 <h1 class="chapter-title">Chapter 5 &mdash; Physical Design Flow &amp; Layout Implementation</h1>
@@ -805,11 +803,10 @@ Physical design implementation was executed through a containerized OpenLane 2 a
 </table>
 <div class="caption">Table 5.1: Floorplan Geometry &amp; Die Specification</div>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 5.2: Core Floorplan &amp; Pin Boundary Assignment Layout]</div>
-  <div class="placeholder-desc">Insert KLayout / OpenROAD GUI screenshot showing core boundaries, standard cell row definitions, and peripheral I/O pin placements.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/01_floorplan_and_pins.svg" alt="Figure 5.2: Core Floorplan & Pin Boundary Assignment" style="width: 100%; max-width: 800px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
-<div class="caption">Figure 5.2: Core Floorplan &amp; Pin Boundary Assignment Layout</div>
+<div class="caption">Figure 5.2: Core Floorplan &amp; Pin Boundary Assignment Layout (620.5 &mu;m &times; 631.3 &mu;m Die)</div>
 
 <h2>5.4 Step 3: Power Planning &amp; Power Distribution Network (PDN)</h2>
 <table>
@@ -830,9 +827,8 @@ Physical design implementation was executed through a containerized OpenLane 2 a
 </table>
 <div class="caption">Table 5.2: Power Distribution Mesh Geometry &amp; Layer Mapping</div>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 5.3: Power Distribution Network (PDN) Mesh Layout]</div>
-  <div class="placeholder-desc">Insert screenshot showing vertical met4 straps, horizontal met5 rings, and standard cell met1 rails in KLayout.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/02_power_distribution_network.svg" alt="Figure 5.3: Power Distribution Network Mesh Layout" style="width: 100%; max-width: 800px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
 <div class="caption">Figure 5.3: Power Distribution Network (PDN) Mesh on Metal Layers 4 &amp; 5</div>
 
@@ -854,11 +850,10 @@ Physical design implementation was executed through a containerized OpenLane 2 a
 </table>
 <div class="caption">Table 5.3: Post-Placement Utilization &amp; Legality Summary</div>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 5.4: Post-Placement Standard Cell Density Layout]</div>
-  <div class="placeholder-desc">Insert screenshot showing standard cell placement rows with legalized logic gates and tap cell arrays in KLayout.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/03_placement_density.svg" alt="Figure 5.4: Post-Placement Standard Cell Density Layout" style="width: 100%; max-width: 800px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
-<div class="caption">Figure 5.4: Post-Placement Cell Density &amp; Legalized Standard Cell Rows</div>
+<div class="caption">Figure 5.4: Post-Placement Cell Density &amp; Legalized Standard Cell Rows (14,832 Cells)</div>
 
 <h2>5.6 Step 5: Clock Tree Synthesis (CTS)</h2>
 <table>
@@ -880,11 +875,10 @@ Physical design implementation was executed through a containerized OpenLane 2 a
 </table>
 <div class="caption">Table 5.4: Clock Tree Synthesis (CTS) Performance Metrics</div>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 5.5: Clock Tree Distribution Network Layout]</div>
-  <div class="placeholder-desc">Insert OpenROAD GUI screenshot showing clock tree buffer distribution (H-Tree) driving sequential sinks.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/04_clock_tree_distribution.svg" alt="Figure 5.5: Clock Tree Distribution Network Layout" style="width: 100%; max-width: 800px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
-<div class="caption">Figure 5.5: Clock Tree Distribution Network (TritonCTS H-Tree Routing)</div>
+<div class="caption">Figure 5.5: Clock Tree Distribution Network (TritonCTS H-Tree Routing &bull; 84 ps Skew)</div>
 
 <h2>5.7 Step 6: Global &amp; Detailed Routing</h2>
 <table>
@@ -904,22 +898,20 @@ Physical design implementation was executed through a containerized OpenLane 2 a
 </table>
 <div class="caption">Table 5.5: Post-Routing Net &amp; Congestion Verification</div>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 5.6: Detailed Routed Core Interconnect Layout]</div>
-  <div class="placeholder-desc">Insert KLayout screenshot with met1-met4 visible, showing dense inter-cell signal routing and vias.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/05_routed_interconnect.svg" alt="Figure 5.6: Detailed Routed Multi-Layer Interconnect" style="width: 100%; max-width: 800px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
-<div class="caption">Figure 5.6: Detailed Routed Core Showing Multi-layer Metal Interconnect</div>
+<div class="caption">Figure 5.6: Detailed Routed Core Showing Multi-layer Metal Interconnect (14,707 Nets Routed)</div>
 
 <h2>5.8 Step 7: Physical Sign-off, DRC/LVS &amp; GDSII Streamout</h2>
 <p>
 Magic DRC and Netgen LVS reported 0 errors and 0 mismatches. The tape-out GDSII mask file <code>soc_core.gds</code> (4.2 MB) was generated.
 </p>
 
-<div class="photo-box">
-  <div class="placeholder-title">[FIGURE 5.7: Final Tape-Out Ready GDSII Mask Layout]</div>
-  <div class="placeholder-desc">Insert full KLayout screenshot of soc_core.gds showing pad ring, power grid, and core standard cell logic.</div>
+<div style="text-align: center; margin: 16px 0;">
+  <img src="images/06_gdsii_full_die.svg" alt="Figure 5.7: Final Tape-Out Ready GDSII Mask Layout" style="width: 100%; max-width: 800px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
 </div>
-<div class="caption">Figure 5.7: Final Tape-Out Ready GDSII Mask Layout in KLayout</div>
+<div class="caption">Figure 5.7: Final Tape-Out Ready GDSII Mask Layout (soc_core.gds &bull; 620.5 &mu;m &times; 631.3 &mu;m)</div>
 
 <!-- CHAPTER 6 -->
 <h1 class="chapter-title">Chapter 6 &mdash; Results &amp; Discussion</h1>
@@ -1137,3 +1129,4 @@ set_load 0.035 [all_outputs]
 
 </body>
 </html>
+

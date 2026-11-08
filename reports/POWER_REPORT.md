@@ -111,3 +111,4 @@ flowchart TD
 - **Junction Temperature Rise ($\Delta T$):**
   $$\Delta T = P_{\text{total}} \cdot \theta_{\text{JA}} = (0.00984\,\text{W}) \times (45^\circ\text{C}/\text{W}) \approx 0.44^\circ\text{C}$$
 - **Conclusion:** Chip junction temperature rise under full $50\,\text{MHz}$ operation is negligible ($< 0.5^\circ\text{C}$). The SoC operates safely under passive air cooling in ambient automotive temperatures ($-40^\circ\text{C}$ to $+85^\circ\text{C}$) without requiring heatsinks or heat spreaders.
+

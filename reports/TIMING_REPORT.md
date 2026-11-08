@@ -121,3 +121,4 @@ Clock Tree Synthesis was performed using **TritonCTS** to construct a balanced, 
 - **Measured Post-Routing Skew:** **$0.084\,\text{ns}$** ($84\,\text{ps}$)
 - **Clock Insertion Latency:** $1.42\,\text{ns}$ (Average root-to-sink latency)
 - **Clock Transition Time (Max Slew):** $0.118\,\text{ns}$ (Complies with $0.150\,\text{ns}$ SDC limit)
+
