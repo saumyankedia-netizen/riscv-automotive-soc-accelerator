@@ -7,28 +7,62 @@ on:
 
 jobs:
   openlane:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+
     steps:
+      # ── 1. Checkout ────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
+      # ── 2. Python ──────────────────────────────────────────────────────────
+      - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.10"
+          cache: "pip"
 
-      - name: Install OpenLane 2
+      # ── 3. Nix (required by OpenLane 2 for Yosys / OpenROAD / Magic) ──────
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      # ── 4. Install volare + OpenLane 2 ────────────────────────────────────
+      - name: Install volare and OpenLane 2
         run: |
           pip install --upgrade pip
-          pip install openlane
+          pip install volare
+          pip install --upgrade openlane
 
-      - name: Verify OpenLane installation
-        run: openlane --version
+      # ── 5. Cache Sky130 PDK (saves ~15 min on cache hit) ──────────────────
+      - name: Cache Sky130 PDK
+        id: cache-pdk
+        uses: actions/cache@v4
+        with:
+          path: ~/.volare
+          key: volare-sky130-${{ hashFiles('openlane/soc_core/config.json') }}
+          restore-keys: |
+            volare-sky130-
 
-      - name: Run OpenLane 2 Flow
+      # ── 6. Download Sky130 PDK via volare ─────────────────────────────────
+      - name: Enable Sky130 PDK
+        if: steps.cache-pdk.outputs.cache-hit != 'true'
         run: |
-          openlane openlane/soc_core/config.json
+          volare enable --pdk sky130
 
+      # ── 7. Run OpenLane 2 flow ─────────────────────────────────────────────
+      - name: Run OpenLane 2 Flow
+        env:
+          PDK_ROOT: ${{ github.workspace }}/.volare
+        run: |
+          export PDK_ROOT=$HOME/.volare
+          python3 -m openlane \
+            --pdk sky130 \
+            --pdk-root $HOME/.volare \
+            openlane/soc_core/config.json
+
+      # ── 8. Upload GDSII artifacts ──────────────────────────────────────────
       - name: Upload GDSII and Reports
         uses: actions/upload-artifact@v4
         if: always()

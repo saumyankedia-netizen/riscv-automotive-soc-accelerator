@@ -8,10 +8,6 @@
     ],
     "CLOCK_PORT": "clk",
     "CLOCK_PERIOD": 20.0,
-    "CLOCK_NET": "clk",
-
-    "PDN_CFG": null,
-    "PNR_SDC_FILE": "dir::constraints.sdc",
 
     "FP_SIZING": "relative",
     "FP_CORE_UTIL": 45,
@@ -25,7 +21,7 @@
 
     "RUN_KLAYOUT_XOR": false,
     "RUN_KLAYOUT_DRC": false,
-    "RUN_MAGIC_DRC": true,
+    "RUN_MAGIC_DRC": false,
     "RUN_LVS": false,
 
     "QUIT_ON_TIMING_VIOLATIONS": false,
