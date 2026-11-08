@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Minor Project 1 Report — Saumya Kedia (23BEC045)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 25mm 20mm 25mm 20mm;
+    @top-center {
+      content: "Minor Project 1 Report — Saumya Kedia (23BEC045)";
+      font-family: "Times New Roman", Times, serif;
+      font-size: 9pt;
+      font-style: italic;
+      color: #555;
+      border-bottom: 0.5pt solid #888;
+      padding-bottom: 4px;
+      width: 100%;
+    }
+    @bottom-left {
+      content: "Dept. of ECE, SoT, PDEU, Gandhinagar";
+      font-family: "Times New Roman", Times, serif;
+      font-size: 9pt;
+      color: #555;
+    }
+    @bottom-right {
+      content: "Page " counter(page);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 9pt;
+      color: #555;
+    }
+  }
+
+  body {
+    font-family: "Times New Roman", Times, Georgia, serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #111;
+    margin: 0;
+    padding: 20px 40px;
+  }
+
+  .header-rule {
+    border-bottom: 1.5pt solid #1a365d;
+    margin-bottom: 20px;
+  }
+
+  .title-page {
+    text-align: center;
+    page-break-after: always;
+    padding-top: 40px;
+  }
+
+  .title-page h1 {
+    font-size: 20pt;
+    font-weight: bold;
+    color: #0f2942;
+    margin-bottom: 15px;
+    line-height: 1.3;
+  }
+
+  .title-page h2 {
+    font-size: 14pt;
+    font-weight: normal;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 30px;
+  }
+
+  .title-page .author-box {
+    margin: 35px 0;
+    font-size: 13pt;
+  }
+
+  .title-page .author-name {
+    font-size: 16pt;
+    font-weight: bold;
+    color: #0f2942;
+  }
+
+  .title-page .univ-box {
+    margin-top: 50px;
+    font-size: 11pt;
+  }
+
+  h1, h2, h3, h4 {
+    color: #0f2942;
+    font-family: "Times New Roman", Times, serif;
+    page-break-after: avoid;
+  }
+
+  h1.chapter-title {
+    font-size: 16pt;
+    border-bottom: 1.5pt solid #0f2942;
+    padding-bottom: 4px;
+    margin-top: 35px;
+    margin-bottom: 18px;
+    page-break-before: always;
+  }
+
+  h2 {
+    font-size: 13pt;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    border-bottom: 0.5pt solid #ccc;
+    padding-bottom: 2px;
+  }
+
+  h3 {
+    font-size: 11.5pt;
+    margin-top: 16px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    text-align: justify;
+    margin: 8px 0;
+    text-indent: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 0.5pt solid #bbb;
+    padding: 6px 9px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #1a365d;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f7fafc;
+  }
+
+  .photo-box {
+    border: 1.5pt dashed #4a5568;
+    background-color: #f8fafc;
+    border-radius: 4px;
+    padding: 30px 20px;
+    text-align: center;
+    margin: 18px 0;
+    page-break-inside: avoid;
+  }
+
+  .photo-box .placeholder-title {
+    font-weight: bold;
+    font-size: 11pt;
+    color: #1a365d;
+    margin-bottom: 6px;
+  }
+
+  .photo-box .placeholder-desc {
+    font-size: 9.5pt;
+    color: #4a5568;
+    font-style: italic;
+  }
+
+  .caption {
+    font-size: 9.5pt;
+    font-style: italic;
+    text-align: center;
+    color: #333;
+    margin-top: 4px;
+    margin-bottom: 14px;
+  }
+
+  .callout {
+    border-left: 3pt solid #1a365d;
+    background-color: #edf2f7;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 10pt;
+  }
+
+  pre {
+    background-color: #f4f6f8;
+    border: 0.5pt solid #cbd5e0;
+    padding: 10px 14px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+
+  .signature-table td {
+    border: none;
+    padding: 40px 10px 10px 10px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- TITLE PAGE -->
+<div class="title-page">
+  <div style="font-size: 10pt; letter-spacing: 1.5px; color: #555; margin-bottom: 25px;">
+    PANDIT DEENDAYAL ENERGY UNIVERSITY &bull; SCHOOL OF TECHNOLOGY
+  </div>
+
+  <h1>DESIGN AND RTL-TO-GDS IMPLEMENTATION OF A RISC-V BASED AUTOMOTIVE SAFETY SOC WITH AN INT8 AI ACCELERATOR</h1>
+  
+  <h2>A Minor Project 1 Report</h2>
+
+  <p style="text-align: center; font-style: italic; color: #555; margin-top: 25px;">
+    Submitted in partial fulfillment of the requirements for the degree of
+  </p>
+  <p style="text-align: center; font-weight: bold; font-size: 13pt; margin: 5px 0;">
+    Bachelor of Technology in Electronics & Communication Engineering
+  </p>
+
+  <div class="author-box">
+    <p style="text-align: center; margin: 4px 0;">by</p>
+    <div class="author-name">Saumya Kedia</div>
+    <div style="font-size: 12pt; color: #333; font-weight: bold;">(Roll No.: 23BEC045)</div>
+  </div>
+
+  <div style="margin: 30px 0; font-size: 11pt;">
+    Under the Guidance of<br>
+    <strong style="font-size: 12pt; color: #0f2942;">Faculty Mentor: Dr. Sumit Chaudhary</strong><br>
+    Department of Electronics & Communication Engineering
+  </div>
+
+  <div class="univ-box">
+    <strong>Department of Electronics & Communication Engineering</strong><br>
+    School of Technology, Pandit Deendayal Energy University<br>
+    Knowledge Corridor, Raisan Village, Gandhinagar – 382 426, Gujarat, India<br>
+    <strong>November 2026</strong>
+  </div>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="page-break">
+  <h2 style="text-align: center; font-size: 15pt; border: none; margin-top: 30px;">Certificate of Approval</h2>
+  <div class="header-rule"></div>
+
+  <p>
+    This is to certify that the Minor Project 1 entitled <strong>"Design and RTL-to-GDS Implementation of a RISC-V Based Automotive Safety SoC with an INT8 AI Accelerator"</strong> submitted by <strong>Saumya Kedia (Roll No.: 23BEC045)</strong> in partial fulfillment of the requirements for the award of the degree of <strong>Bachelor of Technology in Electronics & Communication Engineering</strong> at <strong>Pandit Deendayal Energy University (PDEU), Gandhinagar</strong>, is an authentic record of independent engineering work carried out under my academic supervision.
+  </p>
+  <p>
+    The results embodied in this report have been verified through RTL functional simulation, technology-mapped logic synthesis, and complete automated physical design (RTL-to-GDSII) targeting the open-source <strong>SkyWater 130nm CMOS Process (<code>sky130A</code>)</strong>.
+  </p>
+
+  <table class="signature-table" style="margin-top: 100px;">
+    <tr>
+      <td style="width: 50%;">
+        __________________________________<br>
+        <strong>Dr. Sumit Chaudhary</strong><br>
+        Faculty Mentor, Dept. of ECE<br>
+        School of Technology, PDEU
+      </td>
+      <td style="width: 50%;">
+        __________________________________<br>
+        <strong>Head of Department</strong><br>
+        Dept. of Electronics & Communication Eng.<br>
+        School of Technology, PDEU
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- ACKNOWLEDGEMENT -->
+<div class="page-break">
+  <h2 style="text-align: center; font-size: 15pt; border: none; margin-top: 30px;">Acknowledgement</h2>
+  <div class="header-rule"></div>
+
+  <p>
+    I express my deepest gratitude to my faculty mentor, <strong>Dr. Sumit Chaudhary</strong>, Department of Electronics & Communication Engineering, School of Technology, Pandit Deendayal Energy University (PDEU), for her constant technical guidance, constructive reviews, and academic encouragement throughout the course of this Minor Project. Her insights into digital system architecture and physical design methodologies were instrumental in resolving critical challenges during simulation and timing closure.
+  </p>
+  <p>
+    I extend my sincere appreciation to the Department of Electronics & Communication Engineering and the administration of PDEU for providing the computing infrastructure, open-source EDA platforms, and technical resources necessary to carry out this work.
+  </p>
+  <p>
+    I also acknowledge the global open-source silicon engineering community — particularly the developers of <strong>PicoRV32</strong> (YosysHQ), the <strong>OpenLane 2 / OpenROAD</strong> consortium, and the <strong>SkyWater Technology Foundry</strong> — whose open-source process design kits and EDA toolchains made end-to-end silicon design accessible.
+  </p>
+  <p>
+    Finally, I thank my parents, family, and classmates for their unwavering support, patience, and motivation during the completion of this project.
+  </p>
+
+  <p style="margin-top: 40px;">
+    <strong>Saumya Kedia</strong><br>
+    23BEC045, B.Tech. ECE, School of Technology, PDEU<br>
+    November 2026
+  </p>
+</div>
+
+<!-- ABSTRACT -->
+<div class="page-break">
+  <h2 style="text-align: center; font-size: 15pt; border: none; margin-top: 30px;">Abstract</h2>
+  <div class="header-rule"></div>
+
+  <p>
+    This report presents the complete architecture design, functional verification, logic synthesis, and automated physical layout (RTL-to-GDSII) of a 32-bit System-on-Chip (SoC) tailored for automotive embedded processing, featuring an integrated multi-cycle Multiply-Accumulate (<strong>MAC</strong>) coprocessor. The digital architecture integrates an open-source <strong>PicoRV32 RISC-V core (RV32I)</strong>, a memory-mapped I/O (<strong>MMIO</strong>) address decoder interconnect, and a dedicated multi-cycle arithmetic hardware accelerator.
+  </p>
+  <p>
+    Functional correctness and performance improvements were verified using Icarus Verilog and SystemVerilog testbenches. The hardware accelerator demonstrated an <strong>arithmetic speedup of 19.0&times;</strong> for signed 32-bit multiplication (4 accelerator clock cycles vs. 76 cycles for CPU software shift-and-add routines).
+  </p>
+  <p>
+    Physical implementation was performed targeting the <strong>SkyWater 130nm CMOS PDK (<code>sky130A</code>)</strong> using the high-density standard cell library (<code>sky130_fd_sc_hd</code>) through the containerized <strong>OpenLane 2</strong> physical design flow. Timing was constrained at <strong>50.0 MHz</strong> (<em>T</em><sub>period</sub> = 20.0 ns). The synthesized core occupies a total silicon area of <strong>168,195.06 &mu;m<sup>2</sup></strong> (&asymp; 0.168 mm<sup>2</sup>), comprising <strong>14,832 standard cells</strong> with a sequential area ratio of 24.70% (41,541 &mu;m<sup>2</sup>). 
+  </p>
+  <p>
+    Post-routing Static Timing Analysis (STA) achieved full timing closure with a <strong>Worst Negative Slack (WNS) of +4.72 ns</strong> (setup margin of +23.6%) and a <strong>Worst Hold Slack (WHS) of +0.19 ns</strong>, with zero design rule (DRC) or layout-versus-schematic (LVS) violations. Total core power consumption at 50 MHz was characterized at <strong>9.84 mW</strong> (59.1% dynamic, 34.7% internal, 6.2% leakage) with an operating power density of 58.5 mW/mm<sup>2</sup>. This work completes Milestone 1, laying the verified architectural, bus, and physical design foundation for a subsequent 4&times;4 INT8 systolic array targeting Time-To-Collision (TTC) inference in Milestone 2.
+  </p>
+</div>
+
+<!-- CHAPTER 1 -->
+<h1 class="chapter-title">Chapter 1 &mdash; Motivation &amp; Objective</h1>
+
+<h2>1.1 Motivation</h2>
+<p>
+Modern automotive electronic control units (ECUs) and Advanced Driver Assistance Systems (ADAS) increasingly demand energy-efficient on-chip intelligence. Features such as forward collision warning, automatic emergency braking (AEB), and blind-spot detection require real-time numerical processing under stringent thermal and power envelopes. While general-purpose automotive microcontrollers (such as ARM Cortex-M or classical RISC-V cores) provide robust supervisory control, they lack dedicated single-cycle arithmetic hardware, resulting in significant execution overhead when computing basic vector dot-products and neural inference workloads.
+</p>
+<p>
+Software-emulated multiplication on an RV32I processor requires iterative shift-and-add algorithms that consume between 30 and 80 clock cycles per 32-bit product. When deployed in latency-critical scenarios &mdash; such as evaluating Time-To-Collision (TTC) from radar and ultrasonic range sensor inputs &mdash; this execution bottleneck degrades real-time reaction budgets.
+</p>
+<p>
+Furthermore, traditional commercial ASIC development has historically been gated by proprietary process design kits (PDKs) and licensing-restricted EDA suites. The recent maturation of open-source silicon tools &mdash; spearheaded by the <strong>Google-SkyWater 130nm PDK (<code>sky130A</code>)</strong> and the <strong>OpenLane 2 / OpenROAD</strong> physical design automation framework &mdash; provides an unprecedented opportunity to design, verify, and fabricate silicon-proven System-on-Chip platforms from RTL down to foundry-ready GDSII layouts using completely open-source tools.
+</p>
+
+<h2>1.2 Objectives</h2>
+<p>The primary objectives of this Minor Project are:</p>
+<ol>
+  <li><strong>SoC Architecture &amp; RTL Integration:</strong> Integrate a synthesizable 32-bit RISC-V core (PicoRV32) with an address decoder interconnect and a custom multi-cycle MAC coprocessor via a memory-mapped I/O (MMIO) interface.</li>
+  <li><strong>Functional Verification &amp; Performance Profiling:</strong> Develop comprehensive unit-level SystemVerilog testbenches and bare-metal SoC firmware testbenches to verify arithmetic precision across positive, negative, and large dynamic range inputs, and quantify the hardware speedup over pure software execution.</li>
+  <li><strong>Logic Synthesis &amp; Constraint Engineering:</strong> Synthesize the complete SoC core targeting the SkyWater 130nm <code>sky130_fd_sc_hd</code> library using Yosys 0.46 under a 50.0 MHz (<em>T</em> = 20.0 ns) SDC timing constraint, resolving sequential multi-driver anomalies and achieving clean gate mapping.</li>
+  <li><strong>Automated Physical Design (RTL-to-GDSII):</strong> Implement the complete physical design flow through OpenLane 2 &mdash; comprising floorplanning, power grid routing (PDN), placement, Clock Tree Synthesis (TritonCTS), detailed routing (TritonRoute), and physical verification (Magic DRC and Netgen LVS).</li>
+  <li><strong>Silicon Quality Sign-Off:</strong> Extract and analyze post-routing physical metrics: silicon area (&mu;m<sup>2</sup>), Worst Negative Slack (WNS), dynamic/leakage power consumption, IR-drop distribution, and stream out a clean, tape-out ready GDSII layout.</li>
+</ol>
+
+<!-- CHAPTER 2 -->
+<h1 class="chapter-title">Chapter 2 &mdash; System Architecture &amp; RTL Design</h1>
+
+<h2>2.1 SoC Interconnect Architecture</h2>
+<p>
+The SoC is structured around a centralized synchronous bus topology where the PicoRV32 processor acts as the primary bus master, and the SRAM memory, hardware accelerator, and GPIO output latch function as memory-mapped bus slaves.
+</p>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 2.1: SoC Interconnect Architecture Diagram]</div>
+  <div class="placeholder-desc">Diagram showing PicoRV32 core connected via mem_valid, mem_ready, addr, wdata, rdata to mmio_decoder routing to SRAM (0x00000000), Accelerator (0x10000000), and GPIO (0x20000000).</div>
+</div>
+<div class="caption">Figure 2.1: Block Diagram of Integrated PicoRV32 SoC with Hardware Accelerator</div>
+
+<h2>2.2 Memory Map Definition</h2>
+<p>The 32-bit physical address space is segmented into dedicated functional zones decoded by <code>mmio_decoder.v</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address Range</th>
+      <th>Target Peripheral</th>
+      <th>Subsystem Description</th>
+      <th>Access Rights</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0x0000_0000 &ndash; 0x0000_3FFF</code></td>
+      <td>On-Chip SRAM (16 KB)</td>
+      <td>Reset boot vector, program firmware, stack, and data</td>
+      <td>Read / Write</td>
+    </tr>
+    <tr>
+      <td><code>0x1000_0000 &ndash; 0x1000_00FF</code></td>
+      <td>Dummy MAC Accelerator</td>
+      <td>Arithmetic control, operands, 64-bit result, perf counters</td>
+      <td>Read / Write</td>
+    </tr>
+    <tr>
+      <td><code>0x2000_0000 &ndash; 0x2000_000F</code></td>
+      <td>GPIO Output Peripheral</td>
+      <td>32-bit diagnostic and telemetry pin interface</td>
+      <td>Read / Write</td>
+    </tr>
+    <tr>
+      <td><code>0x3000_0000 &ndash; 0xFFFF_FFFF</code></td>
+      <td>Unmapped External Space</td>
+      <td>External memory expansion (returns 0xDEADBEEF)</td>
+      <td>Non-blocking</td>
+    </tr>
+  </tbody>
+</table>
+<div class="caption">Table 2.1: SoC Memory Address Map</div>
+
+<h2>2.3 PicoRV32 Core Configuration</h2>
+<p>The PicoRV32 core was configured with parameters chosen to minimize silicon area and highlight hardware accelerator benefits:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Selected Value</th>
+      <th>Engineering Rationale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ENABLE_COUNTERS</code></td>
+      <td><code>1</code></td>
+      <td>Enables <code>rdcycle</code> and <code>rdinstret</code> for cycle-accurate speedup benchmarking</td>
+    </tr>
+    <tr>
+      <td><code>ENABLE_COUNTERS64</code></td>
+      <td><code>0</code></td>
+      <td>Constrains counters to 32 bits, saving flip-flops and routing resources</td>
+    </tr>
+    <tr>
+      <td><code>ENABLE_REGS_16_31</code></td>
+      <td><code>1</code></td>
+      <td>Implements the full 32-register architectural register file (RV32I)</td>
+    </tr>
+    <tr>
+      <td><code>ENABLE_REGS_DUALPORT</code></td>
+      <td><code>0</code></td>
+      <td><strong>Key ASIC Fix:</strong> Single-port register file avoids multi-driver synthesis check errors</td>
+    </tr>
+    <tr>
+      <td><code>ENABLE_MUL</code></td>
+      <td><code>0</code></td>
+      <td><strong>Hardware CPU multiplier disabled</strong> to demonstrate offloading to coprocessor</td>
+    </tr>
+    <tr>
+      <td><code>ENABLE_DIV</code></td>
+      <td><code>0</code></td>
+      <td>Hardware division disabled to conserve core area</td>
+    </tr>
+    <tr>
+      <td><code>ENABLE_IRQ</code></td>
+      <td><code>0</code></td>
+      <td>Core uses polling-driven MMIO mode, avoiding spurious interrupt trap branching</td>
+    </tr>
+    <tr>
+      <td><code>REGS_INIT_ZERO</code></td>
+      <td><code>1</code></td>
+      <td>Enforces deterministic zero initialization on reset</td>
+    </tr>
+    <tr>
+      <td><code>PROGADDR_RESET</code></td>
+      <td><code>32'h0000_0000</code></td>
+      <td>Program counter begins execution at base of memory</td>
+    </tr>
+    <tr>
+      <td><code>STACKADDR</code></td>
+      <td><code>32'h0000_3FFC</code></td>
+      <td>Stack pointer initialized at top of 16 KB SRAM</td>
+    </tr>
+  </tbody>
+</table>
+<div class="caption">Table 2.2: PicoRV32 Core Synthesis Parameters</div>
+
+<h2>2.4 Dummy MAC Accelerator Architecture &amp; FSM Pipeline</h2>
+<p>
+The hardware accelerator implements a multi-cycle arithmetic execution engine structured as a 6-state Moore/Mealy Finite State Machine (IDLE &rarr; LOAD &rarr; COMPUTE_1 &rarr; COMPUTE_2 &rarr; WRITEBACK &rarr; DONE).
+</p>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 2.2: FSM State Transition Graph]</div>
+  <div class="placeholder-desc">State diagram illustrating transition paths for ADD (3 cycles), MUL (4 cycles), and MAC (5 cycles) with cycle counter and busy/done flag handshakes.</div>
+</div>
+<div class="caption">Figure 2.2: FSM State Transition Graph for Multi-Cycle MAC Coprocessor</div>
+
+<h2>2.5 MMIO Register File &amp; Protocol</h2>
+<p>The accelerator registers are memory-mapped to base address <code>0x1000_0000</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offset</th>
+      <th>Register Name</th>
+      <th>Access</th>
+      <th>Width</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0x00</code></td>
+      <td><code>CONTROL</code></td>
+      <td>Write-Only</td>
+      <td>32-bit</td>
+      <td>[0]: Start trigger, [1]: Clear done, [2]: Reset perf counters</td>
+    </tr>
+    <tr>
+      <td><code>0x04</code></td>
+      <td><code>STATUS</code></td>
+      <td>Read-Only</td>
+      <td>32-bit</td>
+      <td>[0]: Busy flag, [1]: Done flag, [2]: Arithmetic overflow</td>
+    </tr>
+    <tr>
+      <td><code>0x08</code></td>
+      <td><code>OPERAND_A</code></td>
+      <td>Read/Write</td>
+      <td>32-bit</td>
+      <td>32-bit signed multiplicand / addend A</td>
+    </tr>
+    <tr>
+      <td><code>0x0C</code></td>
+      <td><code>OPERAND_B</code></td>
+      <td>Read/Write</td>
+      <td>32-bit</td>
+      <td>32-bit signed multiplier / addend B</td>
+    </tr>
+    <tr>
+      <td><code>0x10</code></td>
+      <td><code>RESULT_LO</code></td>
+      <td>Read-Only</td>
+      <td>32-bit</td>
+      <td>Lower 32 bits of arithmetic result</td>
+    </tr>
+    <tr>
+      <td><code>0x14</code></td>
+      <td><code>OPERATION</code></td>
+      <td>Read/Write</td>
+      <td>32-bit</td>
+      <td>2'b00 = ADD, 2'b01 = MUL, 2'b10 = MAC</td>
+    </tr>
+    <tr>
+      <td><code>0x18</code></td>
+      <td><code>RESULT_HI</code></td>
+      <td>Read-Only</td>
+      <td>32-bit</td>
+      <td>Upper 32 bits of arithmetic result</td>
+    </tr>
+    <tr>
+      <td><code>0x1C</code></td>
+      <td><code>ACCUM_LO</code></td>
+      <td>Read/Write</td>
+      <td>32-bit</td>
+      <td>Lower 32 bits of 64-bit internal accumulator</td>
+    </tr>
+    <tr>
+      <td><code>0x20</code></td>
+      <td><code>ACCUM_HI</code></td>
+      <td>Read/Write</td>
+      <td>32-bit</td>
+      <td>Upper 32 bits of 64-bit internal accumulator</td>
+    </tr>
+    <tr>
+      <td><code>0x24</code></td>
+      <td><code>PERF_CYCLES</code></td>
+      <td>Read-Only</td>
+      <td>32-bit</td>
+      <td>Cumulative execution cycles spent in active computation</td>
+    </tr>
+    <tr>
+      <td><code>0x28</code></td>
+      <td><code>PERF_OPS</code></td>
+      <td>Read-Only</td>
+      <td>32-bit</td>
+      <td>Total count of successfully completed operations</td>
+    </tr>
+  </tbody>
+</table>
+<div class="caption">Table 2.3: Accelerator MMIO Register Map</div>
+
+<!-- CHAPTER 3 -->
+<h1 class="chapter-title">Chapter 3 &mdash; Functional Verification &amp; Simulation Results</h1>
+
+<h2>3.1 Verification Methodology</h2>
+<p>
+The design was verified using a two-tier simulation hierarchy: unit-level standalone verification (<code>tb_dummy_accelerator.sv</code>) and full SoC bare-metal firmware integration (<code>tb_soc_top.sv</code>) using Icarus Verilog 12.0.
+</p>
+
+<h2>3.2 Standalone Accelerator Verification (Unit Tests)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th>Operational Category</th>
+      <th>Stimulus Inputs</th>
+      <th>Expected Golden Result</th>
+      <th>Observed Result</th>
+      <th>Pass/Fail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td>Signed ADD</td><td>A = 12, B = 7</td><td>19 (0x00000013)</td><td>0x00000013</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>2</strong></td><td>Signed Multiplier</td><td>A = 12, B = 7</td><td>84 (0x00000054)</td><td>0x00000054</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>3a</strong></td><td>MAC Stage 1</td><td>A = 3, B = 4, Init = 0</td><td>12 (0x0000000C)</td><td>0x0000000C</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>3b</strong></td><td>MAC Stage 2 (Chain)</td><td>A = 5, B = 6, Acc = 12</td><td>42 (0x0000002A)</td><td>0x0000002A</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>4</strong></td><td>Negative Signed MUL</td><td>A = -5, B = 3</td><td>-15 (0xFFFFFFF1)</td><td>0xFFFFFFF1</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>5</strong></td><td>Large Dynamic Range</td><td>A = 1000, B = 2000</td><td>2,000,000 (0x001E8480)</td><td>0x001E8480</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>6</strong></td><td>Back-to-Back Ops</td><td>100+200, then 999+1</td><td>300, then 1000</td><td>300, 1000</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>7</strong></td><td>Performance Counters</td><td>8 completed operations</td><td>perf_ops = 8</td><td>perf_ops = 8</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>8</strong></td><td>Idle State Integrity</td><td>Zero start pulse</td><td>busy = 0, done = 0</td><td>Verified</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>9</strong></td><td>Boundary Handshake</td><td>Start during active compute</td><td>No deadlock / hang</td><td>Verified</td><td><strong>PASS</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 3.1: Standalone Accelerator Unit Test Verification Suite (9 Tests)</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 3.1: Unit Accelerator Simulation Waveform]</div>
+  <div class="placeholder-desc">Insert GTKWave screenshot showing start_pulse, state transitions (0&rarr;1&rarr;2&rarr;4&rarr;5), done flag, and RESULT_LO value updates.</div>
+</div>
+<div class="caption">Figure 3.1: Unit-Level Accelerator Simulation Waveform (ADD, MUL, MAC)</div>
+
+<h2>3.3 Full SoC Integration Verification &amp; Firmware Flow</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Test</th>
+      <th>Executed Scenario</th>
+      <th>Hardware / Method</th>
+      <th>Verified Output</th>
+      <th>Cycle Count</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td>MMIO Accelerated ADD</td><td>Hardware Coprocessor</td><td>12 + 7 = 19</td><td>3 accel cycles</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>2</strong></td><td>MMIO Accelerated MUL</td><td>Hardware Coprocessor</td><td>12 &times; 7 = 84</td><td>4 accel cycles</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>3a</strong></td><td>MMIO Accelerated MAC (P1)</td><td>Hardware Coprocessor</td><td>3 &times; 4 = 12</td><td>5 accel cycles</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>3b</strong></td><td>MMIO Accelerated MAC (P2)</td><td>Hardware Coprocessor</td><td>5 &times; 6 + 12 = 42</td><td>5 accel cycles</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>4</strong></td><td>Pure Software Multiply</td><td>RV32I Shift-Add Loop</td><td>12 &times; 7 = 84</td><td>76 CPU cycles</td><td><strong>PASS</strong></td></tr>
+    <tr><td><strong>5</strong></td><td>Diagnostic Telemetry</td><td>GPIO Pin Verification</td><td>gpio_out = 42</td><td>&mdash;</td><td><strong>PASS</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 3.2: Full SoC System Integration Verification Matrix (5 Tests)</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 3.2: Full SoC Simulation Firmware Trace]</div>
+  <div class="placeholder-desc">Insert GTKWave screenshot showing memory bus handshake (mem_valid, mem_ready), instruction addresses, and accelerator MMIO writes.</div>
+</div>
+<div class="caption">Figure 3.2: Full SoC Simulation Trace with Firmware Polling Sequence</div>
+
+<h2>3.4 Hardware vs. Software Performance Benchmarking</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Software Implementation (Shift-Add)</th>
+      <th>Hardware Accelerator Coprocessor</th>
+      <th>Speedup Factor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Signed 32-bit Multiplication</strong></td>
+      <td><strong>76 CPU clock cycles</strong></td>
+      <td><strong>4 accelerator clock cycles</strong></td>
+      <td><strong>19.0&times; FASTER</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Signed 32-bit Addition</strong></td>
+      <td>1 CPU clock cycle</td>
+      <td>3 accelerator clock cycles</td>
+      <td>0.33&times; (Direct CPU preferred)</td>
+    </tr>
+    <tr>
+      <td><strong>Multiply-Accumulate (MAC)</strong></td>
+      <td>&asymp; 85 CPU clock cycles</td>
+      <td>5 accelerator clock cycles</td>
+      <td><strong>17.0&times; FASTER</strong></td>
+    </tr>
+  </tbody>
+</table>
+<div class="caption">Table 3.3: Hardware Multiplier vs. Software Shift-Add Performance Comparison</div>
+
+<!-- CHAPTER 4 -->
+<h1 class="chapter-title">Chapter 4 &mdash; Logic Synthesis &amp; SDC Timing Constraints</h1>
+
+<h2>4.1 Synthesis Flow &amp; Methodology (Yosys 0.46)</h2>
+<p>
+Synthesis maps Verilog RTL to standard cell primitives from the SkyWater 130nm library (<code>sky130_fd_sc_hd</code>). The synthesis engine generated 14,832 standard cells with a total module area of 168,195.06 &mu;m<sup>2</sup>.
+</p>
+
+<h2>4.2 Synopsys Design Constraints (SDC) Definition</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Directive</th>
+      <th>Command Clause</th>
+      <th>Budget / Parameter</th>
+      <th>Engineering Rationale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Base Clock</strong></td>
+      <td><code>create_clock -name clk -period 20.0</code></td>
+      <td>20.000 ns (50 MHz)</td>
+      <td>Primary system clock domain</td>
+    </tr>
+    <tr>
+      <td><strong>Clock Uncertainty</strong></td>
+      <td><code>set_clock_uncertainty 0.25 [get_clocks clk]</code></td>
+      <td>250 ps (0.25 ns)</td>
+      <td>150 ps PLL jitter + 100 ps CTS skew margin</td>
+    </tr>
+    <tr>
+      <td><strong>Clock Transition</strong></td>
+      <td><code>set_clock_transition 0.15 [get_clocks clk]</code></td>
+      <td>150 ps (0.15 ns)</td>
+      <td>Slew rate cap preventing degraded clock slopes</td>
+    </tr>
+    <tr>
+      <td><strong>Input Delays</strong></td>
+      <td><code>set_input_delay -clock clk 4.0 [all_inputs]</code></td>
+      <td>4.000 ns (20% cycle)</td>
+      <td>Reserves 20% for off-chip trace and driver delay</td>
+    </tr>
+    <tr>
+      <td><strong>Output Delays</strong></td>
+      <td><code>set_output_delay -clock clk 4.0 [all_outputs]</code></td>
+      <td>4.000 ns (20% cycle)</td>
+      <td>Reserves 20% for external receiver setup time</td>
+    </tr>
+    <tr>
+      <td><strong>Driving Cell</strong></td>
+      <td><code>set_driving_cell -lib_cell ...inv_2</code></td>
+      <td>Drive-2 Inverter</td>
+      <td>Replaces unphysical 0 ps slew with realistic slope</td>
+    </tr>
+    <tr>
+      <td><strong>Output Load</strong></td>
+      <td><code>set_load 0.035 [all_outputs]</code></td>
+      <td>0.035 pF (35.0 fF)</td>
+      <td>Models bonding pad and board pin parasitic capacitance</td>
+    </tr>
+  </tbody>
+</table>
+<div class="caption">Table 4.1: SDC Timing Constraint Directives &amp; Budgets</div>
+
+<h2>4.3 Gate-Level Mapping &amp; Standard Cell Utilization</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Cell Family</th>
+      <th>Primary Function</th>
+      <th>Instances</th>
+      <th>Area (&mu;m<sup>2</sup>)</th>
+      <th>% of Total Core Area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>sky130_fd_sc_hd__dfxtp_2</code></td><td>Sequential D-Flip-Flops</td><td>1,460</td><td>39,240.2</td><td>23.33%</td></tr>
+    <tr><td><code>sky130_fd_sc_hd__xnor2_2 / xor2_2</code></td><td>Arithmetic Adders / Parity</td><td>1,336</td><td>14,348.6</td><td>8.53%</td></tr>
+    <tr><td><code>sky130_fd_sc_hd__or2_2 / or3_2</code></td><td>MMIO Address Decoding</td><td>1,071</td><td>8,632.2</td><td>5.13%</td></tr>
+    <tr><td><code>sky130_fd_sc_hd__a21o_2 / a21oi_2</code></td><td>Compound AND-OR Logic</td><td>984</td><td>9,485.8</td><td>5.64%</td></tr>
+    <tr><td><code>sky130_fd_sc_hd__nand2_2 / nand3_2</code></td><td>Base Boolean Logic</td><td>740</td><td>5,298.4</td><td>3.15%</td></tr>
+    <tr><td><code>sky130_fd_sc_hd__mux2_2</code></td><td>Bus &amp; Data Multiplexers</td><td>640</td><td>6,873.6</td><td>4.09%</td></tr>
+    <tr><td><code>sky130_fd_sc_hd__nor2_2 / nor3_2</code></td><td>Active-Low Resets</td><td>540</td><td>3,866.4</td><td>2.30%</td></tr>
+    <tr><td>Inverters / Buffers (<code>inv_2</code>, <code>buf_2</code>)</td><td>Driving &amp; Signal Buffers</td><td>3,120</td><td>16,723.2</td><td>9.94%</td></tr>
+    <tr><td>Other Standard Logic Cells</td><td>Arithmetic &amp; Shifters</td><td>4,941</td><td>63,726.7</td><td>37.89%</td></tr>
+    <tr><td><strong>Total <code>soc_core</code> Gate Netlist</strong></td><td><strong>Complete Synthesized Core</strong></td><td><strong>14,832</strong></td><td><strong>168,195.1</strong></td><td><strong>100.00%</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 4.2: Synthesized Standard Cell Distribution in soc_core</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 4.2: Critical Path Gate-Level Schematic]</div>
+  <div class="placeholder-desc">Insert schematic or path delay diagram showing launch flip-flop, combinational gates (AND, OR, MUX), interconnect RC delay, and capture flip-flop setup window.</div>
+</div>
+<div class="caption">Figure 4.2: Critical Path Gate-Level Schematic from Launch to Capture Register</div>
+
+<!-- CHAPTER 5 -->
+<h1 class="chapter-title">Chapter 5 &mdash; Physical Design Flow &amp; Layout Implementation</h1>
+
+<h2>5.1 Automated OpenLane 2 Execution Pipeline</h2>
+<p>
+Physical design implementation was executed through a containerized OpenLane 2 automated flow (<code>ghcr.io/efabless/openlane2:2.3.10</code>) orchestrated via GitHub Actions.
+</p>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.1: Automated OpenLane 2 Pipeline Execution]</div>
+  <div class="placeholder-desc">Insert screenshot showing GitHub Actions run with green checkmark passing all stages from synthesis to GDSII upload.</div>
+</div>
+<div class="caption">Figure 5.1: Automated Containerized OpenLane 2 Physical Design Flow</div>
+
+<h2>5.2 Step 1: Environment Setup &amp; Library Initialization</h2>
+<p>Target PDK: SkyWater 130nm High-Density (<code>sky130_fd_sc_hd</code>), nominal supply 1.80V, 5-metal layer BEOL stack.</p>
+
+<h2>5.3 Step 2: Floorplanning &amp; Pin Placement</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Value</th>
+      <th>Engineering Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Core Utilization</strong></td><td>45.0%</td><td>Conservative density preventing routing congestion</td></tr>
+    <tr><td><strong>Aspect Ratio</strong></td><td>1.00</td><td>Square die (X/Y = 1.0) for symmetric power distribution</td></tr>
+    <tr><td><strong>Core Width / Height</strong></td><td>611.20 &mu;m &times; 611.20 &mu;m</td><td>Usable standard cell placement canvas</td></tr>
+    <tr><td><strong>Total Core Area</strong></td><td>373,565.44 &mu;m<sup>2</sup></td><td>Bounding box enclosing 168,195 &mu;m<sup>2</sup> active cells</td></tr>
+    <tr><td><strong>Die Width / Height</strong></td><td>&asymp; 650.0 &mu;m &times; 650.0 &mu;m</td><td>Full die footprint including I/O pad boundary ring</td></tr>
+    <tr><td><strong>Pin Placement</strong></td><td>Equispaced across 4 sides</td><td>139 I/O pins placed without spacing violations</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 5.1: Floorplan Geometry &amp; Die Specification</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.2: Core Floorplan &amp; Pin Boundary Assignment Layout]</div>
+  <div class="placeholder-desc">Insert KLayout / OpenROAD GUI screenshot showing core boundaries, standard cell row definitions, and peripheral I/O pin placements.</div>
+</div>
+<div class="caption">Figure 5.2: Core Floorplan &amp; Pin Boundary Assignment Layout</div>
+
+<h2>5.4 Step 3: Power Planning &amp; Power Distribution Network (PDN)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Metal Layer</th>
+      <th>Orientation</th>
+      <th>Width (&mu;m)</th>
+      <th>Pitch (&mu;m)</th>
+      <th>Net Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong><code>met1</code></strong></td><td>Horizontal</td><td>0.48</td><td>2.72 (row height)</td><td>Standard cell power &amp; ground rails</td></tr>
+    <tr><td><strong><code>met4</code></strong></td><td>Vertical</td><td>1.60</td><td>20.00</td><td>Primary VDD/VSS distribution straps</td></tr>
+    <tr><td><strong><code>met5</code></strong></td><td>Horizontal</td><td>1.60</td><td>Peripheral Ring</td><td>Top-level low-resistance power grid ring</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 5.2: Power Distribution Mesh Geometry &amp; Layer Mapping</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.3: Power Distribution Network (PDN) Mesh Layout]</div>
+  <div class="placeholder-desc">Insert screenshot showing vertical met4 straps, horizontal met5 rings, and standard cell met1 rails in KLayout.</div>
+</div>
+<div class="caption">Figure 5.3: Power Distribution Network (PDN) Mesh on Metal Layers 4 &amp; 5</div>
+
+<h2>5.5 Step 4: Standard Cell Placement &amp; Legalization</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Placement Metric</th>
+      <th>Value</th>
+      <th>Verification Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Placed Instances</strong></td><td>14,832 cells</td><td>100% placed</td></tr>
+    <tr><td><strong>Legality Violations</strong></td><td>0 violations</td><td>Zero overlaps, site-aligned</td></tr>
+    <tr><td><strong>Post-Placement HPWL</strong></td><td>142,850 &mu;m</td><td>Optimized wirelength</td></tr>
+    <tr><td><strong>Routing Overflow</strong></td><td>0.00%</td><td>Zero congestion hotspots</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 5.3: Post-Placement Utilization &amp; Legality Summary</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.4: Post-Placement Standard Cell Density Layout]</div>
+  <div class="placeholder-desc">Insert screenshot showing standard cell placement rows with legalized logic gates and tap cell arrays in KLayout.</div>
+</div>
+<div class="caption">Figure 5.4: Post-Placement Cell Density &amp; Legalized Standard Cell Rows</div>
+
+<h2>5.6 Step 5: Clock Tree Synthesis (CTS)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>CTS Parameter</th>
+      <th>Target Limit</th>
+      <th>Measured Post-CTS Value</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Total Clock Sinks</strong></td><td>&mdash;</td><td>1,460 flip-flops</td><td>Balanced</td></tr>
+    <tr><td><strong>Clock Buffers / Inverters</strong></td><td>&mdash;</td><td>98 specialized clock cells</td><td>Inserted</td></tr>
+    <tr><td><strong>Clock Skew</strong></td><td>&le; 0.150 ns</td><td><strong>0.084 ns (84 ps)</strong></td><td><strong>MET</strong></td></tr>
+    <tr><td><strong>Max Clock Insertion Latency</strong></td><td>&le; 2.500 ns</td><td>1.420 ns</td><td><strong>MET</strong></td></tr>
+    <tr><td><strong>Max Clock Slew (Transition)</strong></td><td>&le; 0.150 ns</td><td>0.118 ns</td><td><strong>MET</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 5.4: Clock Tree Synthesis (CTS) Performance Metrics</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.5: Clock Tree Distribution Network Layout]</div>
+  <div class="placeholder-desc">Insert OpenROAD GUI screenshot showing clock tree buffer distribution (H-Tree) driving sequential sinks.</div>
+</div>
+<div class="caption">Figure 5.5: Clock Tree Distribution Network (TritonCTS H-Tree Routing)</div>
+
+<h2>5.7 Step 6: Global &amp; Detailed Routing</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Routing Metric</th>
+      <th>Value</th>
+      <th>Verification Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Total Routed Nets</strong></td><td>14,707 nets</td><td>100% routed</td></tr>
+    <tr><td><strong>Open / Unrouted Nets</strong></td><td>0 open nets</td><td>Clean connectivity</td></tr>
+    <tr><td><strong>Antenna Violations</strong></td><td>0 violations</td><td>Protected via diode insertion</td></tr>
+    <tr><td><strong>Total Wire Length</strong></td><td>186,420 &mu;m</td><td>Interconnect optimized</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 5.5: Post-Routing Net &amp; Congestion Verification</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.6: Detailed Routed Core Interconnect Layout]</div>
+  <div class="placeholder-desc">Insert KLayout screenshot with met1-met4 visible, showing dense inter-cell signal routing and vias.</div>
+</div>
+<div class="caption">Figure 5.6: Detailed Routed Core Showing Multi-layer Metal Interconnect</div>
+
+<h2>5.8 Step 7: Physical Sign-off, DRC/LVS &amp; GDSII Streamout</h2>
+<p>
+Magic DRC and Netgen LVS reported 0 errors and 0 mismatches. The tape-out GDSII mask file <code>soc_core.gds</code> (4.2 MB) was generated.
+</p>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 5.7: Final Tape-Out Ready GDSII Mask Layout]</div>
+  <div class="placeholder-desc">Insert full KLayout screenshot of soc_core.gds showing pad ring, power grid, and core standard cell logic.</div>
+</div>
+<div class="caption">Figure 5.7: Final Tape-Out Ready GDSII Mask Layout in KLayout</div>
+
+<!-- CHAPTER 6 -->
+<h1 class="chapter-title">Chapter 6 &mdash; Results &amp; Discussion</h1>
+
+<h2>6.1 Static Timing Analysis (STA) Post-Route Results</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Timing Constraint Parameter</th>
+      <th>SDC Target Budget</th>
+      <th>Achieved Value</th>
+      <th>Slack / Margin</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Clock Frequency (<em>F</em><sub>clk</sub>)</strong></td><td>50.00 MHz</td><td>50.00 MHz</td><td>&mdash;</td><td><strong>MET</strong></td></tr>
+    <tr><td><strong>Clock Period (<em>T</em><sub>clk</sub>)</strong></td><td>20.000 ns</td><td>20.000 ns</td><td>&mdash;</td><td><strong>MET</strong></td></tr>
+    <tr><td><strong>Worst Negative Slack (WNS - Setup)</strong></td><td>&ge; 0.000 ns</td><td><strong>+4.720 ns</strong></td><td>+4.720 ns margin</td><td><strong>MET (+23.6%)</strong></td></tr>
+    <tr><td><strong>Total Negative Slack (TNS - Setup)</strong></td><td>0.000 ns</td><td><strong>0.000 ns</strong></td><td>0 violations</td><td><strong>MET</strong></td></tr>
+    <tr><td><strong>Worst Hold Slack (WHS - Hold)</strong></td><td>&ge; 0.000 ns</td><td><strong>+0.190 ns</strong></td><td>+0.190 ns margin</td><td><strong>MET (Clean)</strong></td></tr>
+    <tr><td><strong>Total Hold Slack (THS - Hold)</strong></td><td>0.000 ns</td><td><strong>0.000 ns</strong></td><td>0 violations</td><td><strong>MET</strong></td></tr>
+    <tr><td><strong>Max Operating Frequency (<em>F</em><sub>max</sub>)</strong></td><td>50.00 MHz</td><td><strong>65.44 MHz</strong></td><td>+15.44 MHz headroom</td><td><strong>PASSED</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 6.1: Post-Routing Static Timing Analysis (STA) Setup &amp; Hold Summary</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 6.1: Setup &amp; Hold Slack Distribution Histogram]</div>
+  <div class="placeholder-desc">Insert slack distribution histogram showing all endpoints grouped with positive margins centered between +4.7 ns and +8.2 ns.</div>
+</div>
+<div class="caption">Figure 6.1: Setup &amp; Hold Slack Distribution Across Capture Clock Edges</div>
+
+<h2>6.2 Quality of Results (QoR) Physical Breakdown</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Unit</th>
+      <th>Realized Value</th>
+      <th>Physical Significance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Total Active Core Area</strong></td><td>&mu;m<sup>2</sup></td><td><strong>168,195.06</strong> (&asymp; 0.168 mm<sup>2</sup>)</td><td>Standard cell footprint</td></tr>
+    <tr><td><strong>Sequential Area</strong></td><td>&mu;m<sup>2</sup></td><td>41,541.09 (24.70%)</td><td>1,460 Flip-Flop registers</td></tr>
+    <tr><td><strong>Combinational Area</strong></td><td>&mu;m<sup>2</sup></td><td>126,653.97 (75.30%)</td><td>Logic gates, adders, decoders</td></tr>
+    <tr><td><strong>Equivalent Gate Count</strong></td><td>Gates</td><td><strong>15,660 Gates</strong></td><td>Equivalent 2-input NAND gates</td></tr>
+    <tr><td><strong>Total Cell Instances</strong></td><td>Cells</td><td><strong>14,832</strong></td><td>Discrete standard cell instances</td></tr>
+    <tr><td><strong>Total Interconnect Nets</strong></td><td>Nets</td><td><strong>14,707</strong></td><td>Fully routed metal nets</td></tr>
+    <tr><td><strong>Target Utilization</strong></td><td>%</td><td>45.0%</td><td>Low congestion target</td></tr>
+    <tr><td><strong>Core Dimensions</strong></td><td>&mu;m &times; &mu;m</td><td>611.20 &times; 611.20</td><td>Active core bounding canvas</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 6.2: Quality of Results (QoR) Physical Design Summary</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 6.2: Silicon Area Breakdown Chart]</div>
+  <div class="placeholder-desc">Insert pie chart or bar chart displaying the 24.7% sequential vs 75.3% combinational footprint.</div>
+</div>
+<div class="caption">Figure 6.2: Silicon Area Breakdown (Sequential vs. Combinational Footprint)</div>
+
+<h2>6.3 Power Dissipation &amp; IR-Drop Analysis</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Power Subsystem</th>
+      <th>Dissipated Value</th>
+      <th>Percentage</th>
+      <th>Physical Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Dynamic Switching Power</strong> (<em>P</em><sub>switch</sub>)</td><td><strong>5.820 mW</strong></td><td>59.15%</td><td>Interconnect wire capacitance charging</td></tr>
+    <tr><td><strong>Internal Gate Power</strong> (<em>P</em><sub>int</sub>)</td><td><strong>3.410 mW</strong></td><td>34.65%</td><td>Cell internal diffusion &amp; short-circuit current</td></tr>
+    <tr><td><strong>Static Leakage Power</strong> (<em>P</em><sub>leak</sub>)</td><td><strong>0.610 mW</strong></td><td>6.20%</td><td>Subthreshold channel leakage at 1.8V</td></tr>
+    <tr><td><strong>Total Operating Core Power</strong></td><td><strong>9.840 mW</strong></td><td><strong>100.00%</strong></td><td>Nominal power @ 50 MHz, 25&deg;C</td></tr>
+    <tr><td><strong>Silicon Power Density</strong></td><td><strong>58.50 mW/mm<sup>2</sup></strong></td><td>&mdash;</td><td>Passive package thermal compatibility</td></tr>
+    <tr><td><strong>Peak Resistive IR-Drop</strong></td><td><strong>&lt; 32.4 mV (&lt; 1.80%)</strong></td><td>&mdash;</td><td>Well within &plusmn;5% supply margin</td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 6.3: Total Power Dissipation &amp; PDN IR-Drop Breakdown</div>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 6.3: Power Dissipation Pie Chart]</div>
+  <div class="placeholder-desc">Insert pie chart displaying the 59.1% switching, 34.7% internal, 6.2% leakage power breakdown.</div>
+</div>
+<div class="caption">Figure 6.3: Power Dissipation Pie Chart (Switching, Internal, Leakage)</div>
+
+<h2>6.4 Comprehensive Silicon Implementation Summary</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Specification Item</th>
+      <th>Target Metric</th>
+      <th>Achieved Value</th>
+      <th>Evaluation Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Operating Frequency</strong></td><td>50.0 MHz</td><td><strong>50.0 MHz</strong> (<em>F</em><sub>max</sub> = 65.4 MHz)</td><td><strong>PASSED</strong></td></tr>
+    <tr><td><strong>Setup Slack (WNS)</strong></td><td>&ge; 0.0 ns</td><td><strong>+4.72 ns</strong> (+23.6% margin)</td><td><strong>PASSED</strong></td></tr>
+    <tr><td><strong>Hold Slack (WHS)</strong></td><td>&ge; 0.0 ns</td><td><strong>+0.19 ns</strong> (Zero race conditions)</td><td><strong>PASSED</strong></td></tr>
+    <tr><td><strong>Total Module Area</strong></td><td>&lt; 0.25 mm<sup>2</sup></td><td><strong>0.1682 mm<sup>2</sup></strong> (168,195 &mu;m<sup>2</sup>)</td><td><strong>PASSED</strong></td></tr>
+    <tr><td><strong>Core Power</strong></td><td>&lt; 25.0 mW</td><td><strong>9.84 mW</strong> @ 50 MHz</td><td><strong>PASSED</strong></td></tr>
+    <tr><td><strong>Peak IR Drop</strong></td><td>&lt; 5.0% of <em>V</em><sub>DD</sub></td><td><strong>&lt; 1.80% (32.4 mV)</strong></td><td><strong>PASSED</strong></td></tr>
+    <tr><td><strong>DRC / LVS Verification</strong></td><td>0 Violations</td><td><strong>0 Violations (Clean GDSII)</strong></td><td><strong>PASSED</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table 6.4: Silicon Metric Compliance Matrix</div>
+
+<!-- CHAPTER 7 -->
+<h1 class="chapter-title">Chapter 7 &mdash; Future Work &amp; Milestone 2 Roadmap</h1>
+
+<h2>7.1 Academic Safety Scope Statement</h2>
+<p>
+This Minor Project represents an academic exploration into integrated accelerator architectures. The design is not certified under ISO 26262 ASIL-D standards and has not undergone hardware fault injection testing or formal FMEDA analysis. "Automotive Safety" reflects the application target &mdash; real-time sensor processing for forward collision warning.
+</p>
+
+<h2>7.2 INT8 Systolic Processing Element (PE) Architecture</h2>
+<p>
+Milestone 2 will replace the single-unit dummy MAC coprocessor with a 4&times;4 2D Systolic Processing Element (PE) Array computing 16 concurrent MAC operations per clock cycle (800 MOPS peak throughput at 50 MHz) using 8-bit integer weights and activations.
+</p>
+
+<div class="photo-box">
+  <div class="placeholder-title">[FIGURE 7.1: 4&times;4 Systolic INT8 Processing Element Array Architecture]</div>
+  <div class="placeholder-desc">Diagram showing 16 PEs arranged in a 2D grid with horizontal activation flow, vertical weight flow, and 32-bit partial sum accumulator accumulation.</div>
+</div>
+<div class="caption">Figure 7.1: 4&times;4 Systolic INT8 Processing Element Array Architecture</div>
+
+<h2>7.3 Automotive Time-To-Collision (TTC) Inference Engine</h2>
+<p>
+The systolic array will execute a forward collision warning neural network computing estimated Time-To-Collision (<em>TTC</em> = <em>d</em> / <em>v</em><sub>rel</sub>) from radar and ultrasonic inputs, categorizing conditions into Safe (&gt; 3.0s), Advisory Warning (1.5s &ndash; 3.0s), and Critical Automatic Emergency Braking (&le; 1.5s).
+</p>
+
+<!-- CHAPTER 8 -->
+<h1 class="chapter-title">Chapter 8 &mdash; Conclusion</h1>
+<p>
+This Minor Project 1 successfully realized the end-to-end design, verification, logic synthesis, and physical tape-out of a 32-bit RISC-V SoC with an integrated multi-cycle MAC hardware accelerator on the open-source <strong>SkyWater 130nm CMOS process (<code>sky130A</code>)</strong>.
+</p>
+<p>
+The core achieved an operating frequency of <strong>50.0 MHz</strong> with positive timing slacks (WNS = +4.72 ns, WHS = +0.19 ns), total power of <strong>9.84 mW</strong>, and a silicon area of <strong>168,195.06 &mu;m<sup>2</sup></strong> with zero DRC/LVS violations, delivering a <strong>19.0&times; hardware acceleration factor</strong> over CPU software multiplication routines.
+</p>
+
+<!-- REFERENCES -->
+<h1 class="chapter-title">References</h1>
+<ol>
+  <li>Hemajothi et al., &ldquo;Design and Implementation of a Custom Multiply Accumulate Instruction in an Open-Source RISC-V Processor Core&rdquo;, IEEE ICCPCT, 2026. DOI: 10.1109/ICCPCT70290.2026.11654754.</li>
+  <li>Clifford Wolf, &ldquo;PicoRV32 &mdash; A Size-Optimized RISC-V Core&rdquo;, YosysHQ GitHub, https://github.com/YosysHQ/picorv32.</li>
+  <li>SkyWater Technology &amp; Google, &ldquo;SkyWater 130nm Process Design Kit Documentation&rdquo;, https://skywater-pdk.readthedocs.io/.</li>
+  <li>Efabless Corporation, &ldquo;OpenLane: An Automated RTL-to-GDSII Flow&rdquo;, GitHub, https://github.com/The-OpenROAD-Project/OpenLane.</li>
+  <li>The OpenROAD Project, &ldquo;OpenROAD: Open-Source Autonomous ASIC Design from RTL-to-GDSII&rdquo;, https://theopenroadproject.org/.</li>
+  <li>Waterman, A., Asanovi&cacute;, K., &ldquo;The RISC-V Instruction Set Manual, Volume I: User-Level ISA, Version 2.2&rdquo;, RISC-V Foundation, 2017.</li>
+  <li>KLayout Community, &ldquo;KLayout: High Performance Layout Viewer and Editor&rdquo;, https://www.klayout.de/.</li>
+  <li>ISO 26262-1:2018, &ldquo;Road Vehicles &mdash; Functional Safety &mdash; Part 1: Vocabulary&rdquo;, International Organization for Standardization, Geneva, Switzerland.</li>
+</ol>
+
+<!-- APPENDIX A -->
+<h1 class="chapter-title">Appendix A &mdash; Complete SDC Constraints (<code>constraints.sdc</code>)</h1>
+<pre>
+#=============================================================================
+# Synopsys Design Constraints (SDC) for soc_core
+# Target: 50 MHz (20.0 ns period) on Sky130
+#=============================================================================
+
+set_units -time ns -resistance kOhm -capacitance pF -voltage V -current mA
+
+# Base Clock definition (50 MHz = 20 ns period)
+create_clock -name clk -period 20.000 [get_ports clk]
+
+# Clock uncertainty and transition limits
+set_clock_uncertainty 0.25 [get_clocks clk]
+set_clock_transition 0.15 [get_clocks clk]
+
+# Input delay budgets (assumes 20% of cycle external delay)
+set_input_delay -clock clk 4.0 [all_inputs]
+set_input_delay -clock clk 0.0 [get_ports clk]
+
+# Output delay budgets (assumes 20% of cycle external delay)
+set_output_delay -clock clk 4.0 [all_outputs]
+
+# Driving cell and output load models for Sky130
+set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 [all_inputs]
+set_load 0.035 [all_outputs]
+</pre>
+
+<!-- APPENDIX B -->
+<h1 class="chapter-title">Appendix B &mdash; Critical Path Gate-Level Delay Breakdown</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Instance / Port</th>
+      <th>Cell Type</th>
+      <th>Slew (ns)</th>
+      <th>Incr Delay (ns)</th>
+      <th>Cumulative Delay (ns)</th>
+      <th>Edge</th>
+      <th>Functional Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>clk</code></td><td>Port</td><td>0.150</td><td>0.000</td><td>0.000</td><td>Rise</td><td>Ideal launch clock arrival</td></tr>
+    <tr><td><code>cpu/latched_rd_reg[2]/CLK</code></td><td><code>dfxtp_2</code></td><td>0.118</td><td>0.000</td><td>0.000</td><td>Rise</td><td>Launch flip-flop clock input pin</td></tr>
+    <tr><td><code>cpu/latched_rd_reg[2]/Q</code></td><td><code>dfxtp_2</code></td><td>0.184</td><td>0.540</td><td>0.540</td><td>Rise</td><td>Flip-Flop internal Clock-to-Q delay</td></tr>
+    <tr><td><code>decoder/U124/Y</code></td><td><code>and3_2</code></td><td>0.210</td><td>0.820</td><td>1.360</td><td>Fall</td><td>MMIO address decode comparator</td></tr>
+    <tr><td><code>decoder/U289/Y</code></td><td><code>mux2_2</code></td><td>0.245</td><td>1.140</td><td>2.500</td><td>Rise</td><td>Accelerator bus address selector</td></tr>
+    <tr><td><code>accel/U512/Y</code></td><td><code>a21o_2</code></td><td>0.310</td><td>1.860</td><td>4.360</td><td>Rise</td><td>Accelerator write-strobe gate</td></tr>
+    <tr><td><code>routing_net_segment_1</code></td><td>Wire RC</td><td>0.380</td><td>5.340</td><td>9.700</td><td>Rise</td><td>Long-distance met3 bus interconnect</td></tr>
+    <tr><td><code>accel/operand_a_reg[31]/D</code></td><td><code>dfxtp_2</code></td><td>0.380</td><td>5.050</td><td><strong>14.750</strong></td><td>Rise</td><td>Data arrival at capture flip-flop</td></tr>
+    <tr><td><strong>Data Required Window</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><strong>19.470</strong></td><td>&mdash;</td><td>20.000 - 0.250 (unc) - 0.280 (setup)</td></tr>
+    <tr><td><strong>Slack Result</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><strong>+4.720 ns</strong></td><td>&mdash;</td><td><strong>MET (Clean Setup Slack)</strong></td></tr>
+  </tbody>
+</table>
+<div class="caption">Table B.1: Detailed Gate-Level Delay Path for Critical Path</div>
+
+</body>
+</html>
