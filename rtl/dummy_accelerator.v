@@ -117,7 +117,6 @@ module dummy_accelerator (
             operand_a   <= 32'd0;
             operand_b   <= 32'd0;
             operation   <= OP_ADD;
-            accumulator <= 64'd0;
             start_pulse <= 1'b0;
         end else begin
             start_pulse <= 1'b0;  // Default: clear pulse
@@ -133,13 +132,28 @@ module dummy_accelerator (
                             // reset performance counters
                         end
                     end
-                    8'h08: operand_a  <= mmio_wdata;
-                    8'h0C: operand_b  <= mmio_wdata;
-                    8'h14: operation  <= mmio_wdata[1:0];
-                    8'h1C: accumulator[31:0]  <= mmio_wdata;
-                    8'h20: accumulator[63:32] <= mmio_wdata;
+                    8'h08: operand_a <= mmio_wdata;
+                    8'h0C: operand_b <= mmio_wdata;
+                    8'h14: operation <= mmio_wdata[1:0];
                 endcase
             end
+        end
+    end
+
+    //=========================================================================
+    // Accumulator — single always block (avoids multi-driver Yosys errors)
+    // Written by: (1) CPU via MMIO, (2) FSM on MAC writeback
+    //=========================================================================
+    always @(posedge clk) begin
+        if (!resetn) begin
+            accumulator <= 64'd0;
+        end else if (state == S_WRITEBACK && operation == OP_MAC) begin
+            // FSM: update accumulator with MAC result
+            accumulator <= add_result;
+        end else if (mmio_write && mmio_ready_reg) begin
+            // CPU: pre-load accumulator via MMIO
+            if (mmio_addr[7:0] == 8'h1C) accumulator[31:0]  <= mmio_wdata;
+            if (mmio_addr[7:0] == 8'h20) accumulator[63:32] <= mmio_wdata;
         end
     end
 
@@ -280,7 +294,7 @@ module dummy_accelerator (
                         end
                         OP_MAC: begin
                             result      <= add_result;
-                            accumulator <= add_result;  // Update accumulator
+                            // accumulator updated via dedicated always block below
                         end
                         default: begin
                             result <= 64'd0;
