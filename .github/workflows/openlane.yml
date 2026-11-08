@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      # ── 1. Checkout on the HOST runner (not inside Docker) ─────────────────
+      # ── 1. Checkout on the HOST runner ─────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -18,14 +18,17 @@ jobs:
       - name: Pull OpenLane 2 Docker image
         run: docker pull ghcr.io/efabless/openlane2:2.3.10
 
-      # ── 3. Run RTL-to-GDSII flow inside container, workspace mounted in ────
+      # ── 3. Run RTL-to-GDSII — workspace volume-mounted into container ──────
       - name: Run OpenLane 2 Flow
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/work \
             -w /work \
             ghcr.io/efabless/openlane2:2.3.10 \
-            openlane openlane/soc_core/config.json
+            openlane \
+              --pdk sky130 \
+              --pdk-variant sky130A \
+              openlane/soc_core/config.json
 
       # ── 4. Upload GDSII and reports ────────────────────────────────────────
       - name: Upload GDSII and Reports
