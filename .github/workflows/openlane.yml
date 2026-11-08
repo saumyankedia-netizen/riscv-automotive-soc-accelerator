@@ -27,7 +27,6 @@ jobs:
             ghcr.io/efabless/openlane2:2.3.10 \
             openlane \
               --pdk sky130 \
-              --pdk-variant sky130A \
               openlane/soc_core/config.json
 
       # ── 4. Upload GDSII and reports ────────────────────────────────────────
