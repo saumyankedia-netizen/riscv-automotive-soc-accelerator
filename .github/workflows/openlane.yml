@@ -18,7 +18,7 @@ jobs:
             -v $PWD:/work \
             -w /work \
             efabless/openlane:latest \
-            bash -c "./flow.tcl -design openlane -tag run_soc_core"
+            /openlane/flow.tcl -design openlane -tag run_soc_core
 
       - name: Upload GDSII and Layout Artifacts
         uses: actions/upload-artifact@v4
@@ -30,3 +30,4 @@ jobs:
             openlane/runs/*/results/final/def/*.def
             openlane/runs/*/reports/metrics.csv
             openlane/runs/*/reports/synthesis/*.stat.rpt
+            openlane/runs/*/reports/
