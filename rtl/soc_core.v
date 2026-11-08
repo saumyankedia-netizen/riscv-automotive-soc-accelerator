@@ -177,13 +177,16 @@ module soc_core (
     reg        gpio_ready_reg;
 
     always @(posedge clk) begin
-        gpio_ready_reg <= 1'b0;
         if (!resetn) begin
-            gpio_reg <= 32'd0;
-        end else if (gpio_valid && !gpio_ready_reg) begin
-            gpio_ready_reg <= 1'b1;
-            if (gpio_wstrb != 4'b0000)
-                gpio_reg <= gpio_wdata;
+            gpio_reg       <= 32'd0;
+            gpio_ready_reg <= 1'b0;
+        end else begin
+            gpio_ready_reg <= 1'b0;
+            if (gpio_valid && !gpio_ready_reg) begin
+                gpio_ready_reg <= 1'b1;
+                if (gpio_wstrb != 4'b0000)
+                    gpio_reg <= gpio_wdata;
+            end
         end
     end
 

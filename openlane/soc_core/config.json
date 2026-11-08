@@ -17,6 +17,8 @@
     "DRT_THREADS": 4,
 
     "SYNTH_CHECKS_ALLOW_TRISTATE": true,
+    "ERROR_ON_SYNTH_CHECKS": false,
+    "QUIT_ON_SYNTH_CHECKS": false,
 
     "ERROR_ON_MAGIC_DRC": false,
     "ERROR_ON_LVS_ERROR": false

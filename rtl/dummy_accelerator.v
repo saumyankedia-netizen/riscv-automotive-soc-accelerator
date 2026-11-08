@@ -118,8 +118,12 @@ module dummy_accelerator (
             operand_b   <= 32'd0;
             operation   <= OP_ADD;
             start_pulse <= 1'b0;
+            clear_done  <= 1'b0;
+            perf_reset  <= 1'b0;
         end else begin
             start_pulse <= 1'b0;  // Default: clear pulse
+            clear_done  <= 1'b0;
+            perf_reset  <= 1'b0;
 
             if (mmio_write && mmio_ready_reg) begin
                 case (mmio_addr[7:0])
@@ -127,10 +131,9 @@ module dummy_accelerator (
                         if (mmio_wdata[0] && !busy)
                             start_pulse <= 1'b1;
                         if (mmio_wdata[1])
-                            ; // clear_done handled in FSM
-                        if (mmio_wdata[2]) begin
-                            // reset performance counters
-                        end
+                            clear_done <= 1'b1;
+                        if (mmio_wdata[2])
+                            perf_reset <= 1'b1;
                     end
                     8'h08: operand_a <= mmio_wdata;
                     8'h0C: operand_b <= mmio_wdata;
@@ -154,34 +157,6 @@ module dummy_accelerator (
             // CPU: pre-load accumulator via MMIO
             if (mmio_addr[7:0] == 8'h1C) accumulator[31:0]  <= mmio_wdata;
             if (mmio_addr[7:0] == 8'h20) accumulator[63:32] <= mmio_wdata;
-        end
-    end
-
-    //=========================================================================
-    // Performance counter reset
-    //=========================================================================
-    reg perf_reset;
-    always @(posedge clk) begin
-        if (!resetn) begin
-            perf_reset <= 0;
-        end else begin
-            perf_reset <= 0;
-            if (mmio_write && mmio_ready_reg && mmio_addr[7:0] == 8'h00 && mmio_wdata[2])
-                perf_reset <= 1;
-        end
-    end
-
-    //=========================================================================
-    // Done-clear from control register
-    //=========================================================================
-    reg clear_done;
-    always @(posedge clk) begin
-        if (!resetn) begin
-            clear_done <= 0;
-        end else begin
-            clear_done <= 0;
-            if (mmio_write && mmio_ready_reg && mmio_addr[7:0] == 8'h00 && mmio_wdata[1])
-                clear_done <= 1;
         end
     end
 
