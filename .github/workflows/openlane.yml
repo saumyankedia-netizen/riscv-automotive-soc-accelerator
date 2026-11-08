@@ -9,21 +9,23 @@ jobs:
   openlane:
     runs-on: ubuntu-22.04
     container:
-      image: ghcr.io/efabless/openlane2:latest
+      image: ghcr.io/efabless/openlane2:2.3.10
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       # ── 1. Checkout ────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ── 2. Verify tools are present ────────────────────────────────────────
-      - name: Verify OpenLane 2 installation
-        run: python3 -m openlane --version
+      # ── 2. Verify tools ────────────────────────────────────────────────────
+      - name: Verify OpenLane 2
+        run: openlane --version
 
-      # ── 3. Run OpenLane 2 RTL-to-GDSII flow ───────────────────────────────
+      # ── 3. Run RTL-to-GDSII flow ───────────────────────────────────────────
       - name: Run OpenLane 2 Flow
-        run: |
-          python3 -m openlane openlane/soc_core/config.json
+        run: openlane openlane/soc_core/config.json
 
       # ── 4. Upload GDSII and reports ────────────────────────────────────────
       - name: Upload GDSII and Reports
