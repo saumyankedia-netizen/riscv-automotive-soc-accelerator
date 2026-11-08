@@ -12,10 +12,12 @@
 
     "FP_CORE_UTIL": 45,
     "FP_ASPECT_RATIO": 1,
-    "PL_TARGET_DENSITY": 0.50,
 
-    "QUIT_ON_TIMING_VIOLATIONS": false,
-    "QUIT_ON_MAGIC_DRC": false,
-    "QUIT_ON_LVS_ERROR": false,
-    "QUIT_ON_SLEW_VIOLATIONS": false
+    "PL_TARGET_DENSITY_PCT": 50,
+    "DRT_THREADS": 4,
+
+    "SYNTH_CHECKS_ALLOW_TRISTATE": true,
+
+    "ERROR_ON_MAGIC_DRC": false,
+    "ERROR_ON_LVS_ERROR": false
 }
