@@ -8,17 +8,15 @@ on:
 jobs:
   openlane:
     runs-on: ubuntu-latest
+    container:
+      image: efabless/openlane:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run OpenLane Flow (Docker)
+      - name: Run OpenLane Flow
         run: |
-          docker run --rm \
-            -v $PWD:/work \
-            -w /work \
-            efabless/openlane:latest \
-            /openlane/flow.tcl -design openlane -tag run_soc_core
+          flow.tcl -design openlane -tag run_soc_core || openlane --design-dir openlane --tag run_soc_core
 
       - name: Upload GDSII and Layout Artifacts
         uses: actions/upload-artifact@v4
