@@ -12,14 +12,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run OpenLane Flow
-        uses: efabless/openlane-action@v1
-        with:
-          design_dir: "openlane"
-          pdk: "sky130A"
+      - name: Run OpenLane Flow (Docker)
+        run: |
+          docker run --rm \
+            -v $PWD:/work \
+            -w /work \
+            efabless/openlane:latest \
+            bash -c "./flow.tcl -design openlane -tag run_soc_core"
 
       - name: Upload GDSII and Layout Artifacts
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: soc_core_gdsii
           path: |
@@ -27,4 +30,3 @@ jobs:
             openlane/runs/*/results/final/def/*.def
             openlane/runs/*/reports/metrics.csv
             openlane/runs/*/reports/synthesis/*.stat.rpt
-
