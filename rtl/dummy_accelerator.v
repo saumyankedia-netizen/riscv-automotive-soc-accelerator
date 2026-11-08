@@ -109,8 +109,10 @@ module dummy_accelerator (
     wire mmio_write = mmio_valid && (mmio_wstrb != 4'b0000);
     wire mmio_read  = mmio_valid && (mmio_wstrb == 4'b0000);
 
-    // Start pulse from control register write
+    // Control pulses from register write
     reg start_pulse;
+    reg clear_done;
+    reg perf_reset;
 
     always @(posedge clk) begin
         if (!resetn) begin
