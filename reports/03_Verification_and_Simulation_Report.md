@@ -109,3 +109,4 @@ During testbench development, three subtle hardware/firmware bugs were identifie
 3. **SystemVerilog Task Syntax:**
    - *Bug:* Older Icarus Verilog versions reject `return;` inside Verilog tasks.
    - *Fix:* Replaced early returns with explicit `timeout` flag checks.
+

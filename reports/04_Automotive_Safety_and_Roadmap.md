@@ -85,3 +85,4 @@ flowchart TD
 - [x] Tape-out ready GDSII streamout on Sky130A.
 - [ ] Part 2: INT8 PE & Systolic Array implementation.
 - [ ] Part 2: TTC automotive inference firmware.
+

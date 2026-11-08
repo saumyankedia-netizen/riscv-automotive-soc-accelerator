@@ -134,3 +134,4 @@ sequenceDiagram
 ```
 
 The resulting artifact contains `soc_core.gds`, `soc_core.def`, and `metrics.csv`, providing a turnkey reproducible physical implementation.
+

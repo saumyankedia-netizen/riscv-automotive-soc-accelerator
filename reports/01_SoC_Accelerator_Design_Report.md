@@ -112,3 +112,4 @@ The table below contrasts the measured hardware latency against software executi
 
 > [!TIP]
 > The $19.0\times$ speedup verified in simulation confirms the viability of offloading compute-intensive arithmetic to dedicated hardware pipelines, setting the stage for Part 2's systolic INT8 tensor matrix accelerator.
+
